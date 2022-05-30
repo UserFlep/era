@@ -1,12 +1,17 @@
 import React, {FC} from 'react';
 import './App.less';
-import { Button } from 'antd';
+import {ConfigProvider} from "antd";
+import ruRU from 'antd/lib/locale-provider/ru_RU';
+import { BrowserRouter } from 'react-router-dom';
+import Router from './router/router';
 
 const App: FC = () => {
   return (
-    <div className="App">
-      <Button type="primary">Button</Button>
-    </div>
+      <ConfigProvider locale={ruRU}>
+          <BrowserRouter>
+              <Router/>
+          </BrowserRouter>
+      </ConfigProvider>
   );
 }
 
