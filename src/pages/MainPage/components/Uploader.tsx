@@ -1,5 +1,5 @@
 import classes from "./styles/uploader.module.less"
-import React, {useState} from 'react';
+import React, {FC, useState} from 'react';
 import {Modal, Button, Tooltip, Divider} from 'antd';
 import {UploadOutlined} from "@ant-design/icons"
 import CheckboxBlocks from "../../SearchPage/components/CheckboxBlocks";
@@ -8,11 +8,11 @@ import TagList from "../../SearchPage/components/TagList";
 import CompleteInput from "../../SearchPage/components/CompleteInput";
 import UploadDragger from "./UploadDragger";
 
-const Uploader = () => {
-    const [modalVisible, setModalVisible] = useState(false)
-    const [previewVisible, setPreviewVisible] = useState(false)
-    const [previewImage, setPreviewImage] = useState('')
-    const [previewTitle, setPreviewTitle] = useState('')
+const Uploader: FC = () => {
+    const [modalVisible, setModalVisible] = useState<boolean>(false)
+    const [previewVisible, setPreviewVisible] = useState<boolean>(false)
+    const [previewImage, setPreviewImage] = useState<string>('')
+    const [previewTitle, setPreviewTitle] = useState<string>('')
 
     const handlePreviewModalCancel = () => setPreviewVisible(false);
     const handleModalCancel = () => setModalVisible(false);

@@ -1,9 +1,9 @@
-// import classes from "./styles/main-page.module.less"
-import React from 'react';
+//import classes from "./main-page.module.less"
+import React, {FC} from 'react';
 import {hydroAcousticCards, imageCards, radioInfoCards, speechAndTextCards} from "./data/cardData";
 import CardRow from "./components/CardRow";
 
-const MainPage = () => {
+const Index: FC = () => {
 
     return (
         <div>
@@ -15,4 +15,4 @@ const MainPage = () => {
     );
 };
 
-export default MainPage;
+export default Index;

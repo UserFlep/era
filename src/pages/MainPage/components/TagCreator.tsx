@@ -1,9 +1,11 @@
 import React from 'react';
 import {PlusOutlined} from "@ant-design/icons";
 import {Input, message, Space, Typography} from "antd";
+import { observer } from 'mobx-react-lite';
 import {useStore} from "../../../context";
+import {IOption} from "../../../store/storeTypes"
 
-const TagCreator = () => {
+const TagCreator = observer(() => {
     const {checkStore} = useStore()
     const {checkBlocks, addOption, getOtherBlockIndex} = checkStore
     const [inputData, setInputData] = React.useState('')
@@ -14,7 +16,7 @@ const TagCreator = () => {
         if(inputData.trim()==='')
             message.error('Значение не задано')
 
-        else if(checkBlocks[getOtherBlockIndex].options.some(option => option.value === inputData))
+        else if(checkBlocks[getOtherBlockIndex].options.some((option:IOption) => option.value === inputData))
             message.error('Такое значение уже есть')
 
         else {
@@ -31,6 +33,6 @@ const TagCreator = () => {
             </Typography.Link>
         </Space>
     );
-};
+});
 
 export default TagCreator;

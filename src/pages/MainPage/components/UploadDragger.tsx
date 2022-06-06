@@ -1,30 +1,37 @@
-import React from 'react';
+import React, { FC } from 'react';
 import {DownloadOutlined, InboxOutlined} from "@ant-design/icons";
+import type { RcFile, UploadProps } from 'antd/es/upload';
+import type { UploadFile } from 'antd/es/upload/interface';
 import {Upload} from "antd";
 
-const getBase64 = (file) => {
-    return new Promise((resolve, reject) => {
+const getBase64 = (file: RcFile): Promise<string> =>
+    new Promise((resolve, reject) => {
         const reader = new FileReader();
         reader.readAsDataURL(file);
-        reader.onload = () => resolve(reader.result);
+        reader.onload = () => resolve(reader.result as string);
         reader.onerror = error => reject(error);
     });
+
+interface IProps {
+    setPreviewImage: React.Dispatch<React.SetStateAction<string>>,
+    setPreviewVisible: React.Dispatch<React.SetStateAction<boolean>>,
+    setPreviewTitle: React.Dispatch<React.SetStateAction<string>>
 }
 
-const UploadDragger = ({setPreviewImage, setPreviewVisible, setPreviewTitle}) => {
+const UploadDragger: FC<IProps> = ({setPreviewImage, setPreviewVisible, setPreviewTitle}) => {
 
-    const [fileList, setFileList] = React.useState([]);
+    const [fileList, setFileList] = React.useState<UploadFile[]>([]);
 
-    const handlePreview = async file => {
+    const handlePreview = async (file: UploadFile) => {
         if (!file.url && !file.preview) {
-            file.preview = await getBase64(file.originFileObj);
+            file.preview = await getBase64(file.originFileObj as RcFile);
         }
-        setPreviewImage(file.url || file.preview)
+        setPreviewImage(file.url || (file.preview as string))
         setPreviewVisible(true)
-        setPreviewTitle(file.name || file.url.substring(file.url.lastIndexOf('/') + 1))
+        setPreviewTitle(file.name || file.url!.substring(file.url!.lastIndexOf('/') + 1))
     };
 
-    const handleDraggerChange = ({fileList}) => setFileList(fileList);
+    const handleDraggerChange: UploadProps['onChange'] = ({fileList: newFileList}) => setFileList(newFileList);
 
     return (
         <Upload.Dragger

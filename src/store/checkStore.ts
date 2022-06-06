@@ -1,9 +1,9 @@
 import {makeAutoObservable} from "mobx";
 import {nanoid} from "nanoid";
-
+import {id, IOption, IBlock} from "./storeTypes"
 
 class checkStore {
-    checkBlocks = [
+    checkBlocks: IBlock[] = [
             {
                 id: 1,
                 name: "Вид войск",
@@ -58,7 +58,7 @@ class checkStore {
 
 
     // ["", "",...]
-    checkedList=[]
+    checkedList:string[]=[]
 
 
     constructor() {
@@ -73,26 +73,32 @@ class checkStore {
         return this.checkBlocks.findIndex(block=>block.name === "Прочие")
     }
 
-    get getOptionList(){
-        return [].concat(...this.checkBlocks.map(({options})=>options.map(option=>option)))
+    get getOptionList(){ 
+        const optionList:IOption[]=[]
+        this.checkBlocks.map(
+            block => block.options.map(option => {
+                optionList.push(option)
+            })
+        )
+        return optionList
     }
 
     get getCheckedList(){
         return this.checkedList
     }
 
-    setCheckedList=(newCheckedList)=>{
+    setCheckedList=(newCheckedList: string[])=>{
         this.checkedList = newCheckedList
     }
 
-    addOption=(value)=>{
+    addOption=(value: string)=>{
         const id=nanoid()
         const index = this.getOtherBlockIndex
         this.checkBlocks[index].options.push({ id, value })
         this.checkedList.push(value)
     }
 
-    removeOption=(id)=>{
+    removeOption=(id: id)=>{
 
         const blockIndex = this.getOtherBlockIndex
         const optionIndex = this.checkBlocks[blockIndex].options.findIndex(option=>option.id===id)

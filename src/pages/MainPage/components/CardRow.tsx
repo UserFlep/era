@@ -1,9 +1,14 @@
-import React from 'react';
+import React, {FC} from 'react';
 import {Card, Col, Row, Typography} from "antd"
 import Uploader from "./Uploader";
 import {Link} from "react-router-dom";
+import {ICardsBlock} from "../MainPage.d"
 
-const CardRow = ({cardData}) => {
+interface IProps{
+    cardData: ICardsBlock
+}
+
+const CardRow: FC<IProps> = ({cardData}) => {
 
     return (
         <>
