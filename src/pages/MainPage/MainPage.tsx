@@ -3,7 +3,7 @@ import React, {FC} from 'react';
 import {hydroAcousticCards, imageCards, radioInfoCards, speechAndTextCards} from "./data/cardData";
 import CardRow from "./components/CardRow";
 
-const Index: FC = () => {
+const MainPage: FC = () => {
 
     return (
         <div>
@@ -15,4 +15,4 @@ const Index: FC = () => {
     );
 };
 
-export default Index;
+export default MainPage;

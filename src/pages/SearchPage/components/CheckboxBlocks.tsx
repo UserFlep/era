@@ -4,7 +4,7 @@ import {Checkbox, Col, Row, Space, Typography} from "antd";
 import {useStore} from "../../../context";
 import {observer} from "mobx-react-lite";
 import type {CheckboxValueType} from "antd/es/checkbox/Group";
-import { IBlock } from '../../../store/storeTypes';
+import { IBlock } from '../../../store/types';
 
 const CheckboxBlocks: FC = observer (() => {
     const {checkStore} = useStore()

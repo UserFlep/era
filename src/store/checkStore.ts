@@ -1,6 +1,6 @@
 import {makeAutoObservable} from "mobx";
 import {nanoid} from "nanoid";
-import {id, IOption, IBlock} from "./storeTypes"
+import {id, IOption, IBlock} from "./types"
 
 class checkStore {
     checkBlocks: IBlock[] = [
@@ -76,7 +76,7 @@ class checkStore {
     get getOptionList(){ 
         const optionList:IOption[]=[]
         this.checkBlocks.map(
-            block => block.options.map(option => {
+            (block: IBlock) => block.options.forEach((option: IOption):void => {
                 optionList.push(option)
             })
         )

@@ -3,7 +3,7 @@ import {useStore} from "../../../context";
 import React, {FC, ReactNode} from "react";
 import {AutoComplete, Input} from "antd";
 import classes from "./styles/complete-input.module.less";
-import {IOption} from "../../../store/storeTypes";
+import {IOption} from "../../../store/types";
 
 interface IProps {
     enterButton?: ReactNode

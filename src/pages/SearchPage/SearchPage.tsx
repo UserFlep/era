@@ -1,6 +1,6 @@
 import { Layout } from 'antd';
 import React, {FC} from 'react';
-import classes from "./index.module.less"
+import classes from "./search.module.less"
 import SearchHeader from "./components/SearchHeader";
 import SearchContent from "./components/SearchContent";
 

@@ -2,7 +2,7 @@ import React, {FC} from 'react';
 import {Card, Col, Row, Typography} from "antd"
 import Uploader from "./Uploader";
 import {Link} from "react-router-dom";
-import {ICardsBlock} from "../MainPage.d"
+import {ICardsBlock} from "../types"
 
 interface IProps{
     cardData: ICardsBlock

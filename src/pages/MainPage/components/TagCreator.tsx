@@ -1,9 +1,9 @@
 import React from 'react';
 import {PlusOutlined} from "@ant-design/icons";
 import {Input, message, Space, Typography} from "antd";
-import { observer } from 'mobx-react-lite';
+import {observer} from 'mobx-react-lite';
 import {useStore} from "../../../context";
-import {IOption} from "../../../store/storeTypes"
+import {IOption} from "../../../store/types"
 
 const TagCreator = observer(() => {
     const {checkStore} = useStore()

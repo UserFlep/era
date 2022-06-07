@@ -9,7 +9,7 @@ import textRecord from "../../../images/textRec.png"
 import codeLogs from "../../../images/codeLogs.png"
 import db from "../../../images/db.png"
 import nir from "../../../images/nir.png"
-import {ICardsBlock} from "../MainPage.d"
+import {ICardsBlock} from "../types"
 
 
 
