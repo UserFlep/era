@@ -1,7 +1,6 @@
 import React, {FC} from 'react';
 import classes from "./styles/search-content.module.less";
 import {Image, Space, Layout} from "antd";
-
 import temp1 from "../../../images/temp/temp (1).png";
 import temp2 from "../../../images/temp/temp (2).png";
 import temp3 from "../../../images/temp/temp (3).png";
@@ -22,32 +21,33 @@ import temp17 from "../../../images/temp/temp (17).png";
 import temp18 from "../../../images/temp/temp (18).png";
 import temp19 from "../../../images/temp/temp (19).png";
 import temp20 from "../../../images/temp/temp (20).png";
+import SearchCard from "./SearchCard";
 
 const SearchContent: FC = () => {
     return (
         <Layout.Content className={classes.content}>
             <Image.PreviewGroup>
                 <Space size={16} style={{flexWrap: 'wrap'}}>
-                    <Image width={180} src={temp1} />
-                    <Image width={180} src={temp2} />
-                    <Image width={180} src={temp3} />
-                    <Image width={180} src={temp4} />
-                    <Image width={180} src={temp5} />
-                    <Image width={180} src={temp6} />
-                    <Image width={180} src={temp7} />
-                    <Image width={180} src={temp8} />
-                    <Image width={180} src={temp9} />
-                    <Image width={180} src={temp10} />
-                    <Image width={180} src={temp11} />
-                    <Image width={180} src={temp12} />
-                    <Image width={180} src={temp13} />
-                    <Image width={180} src={temp14} />
-                    <Image width={180} src={temp15} />
-                    <Image width={180} src={temp16} />
-                    <Image width={180} src={temp17} />
-                    <Image width={180} src={temp18} />
-                    <Image width={180} src={temp19} />
-                    <Image width={180} src={temp20} />
+                    <SearchCard imageUri={temp1}/>
+                    <SearchCard imageUri={temp2}/>
+                    <SearchCard imageUri={temp3}/>
+                    <SearchCard imageUri={temp4}/>
+                    <SearchCard imageUri={temp5}/>
+                    <SearchCard imageUri={temp6}/>
+                    <SearchCard imageUri={temp7}/>
+                    <SearchCard imageUri={temp8}/>
+                    <SearchCard imageUri={temp9}/>
+                    <SearchCard imageUri={temp10}/>
+                    <SearchCard imageUri={temp11}/>
+                    <SearchCard imageUri={temp12}/>
+                    <SearchCard imageUri={temp13}/>
+                    <SearchCard imageUri={temp14}/>
+                    <SearchCard imageUri={temp15}/>
+                    <SearchCard imageUri={temp16}/>
+                    <SearchCard imageUri={temp17}/>
+                    <SearchCard imageUri={temp18}/>
+                    <SearchCard imageUri={temp19}/>
+                    <SearchCard imageUri={temp20}/>
                 </Space>
             </Image.PreviewGroup>
         </Layout.Content>
