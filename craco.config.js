@@ -9,8 +9,10 @@ module.exports = {
                     lessOptions: {
                         modifyVars: {
                             '@primary-color': '#1890ff',
-                            // '@border-radius-base': '8px',
-                            '@arrow-border-radius': '8px',
+                            '@card-padding-base': '12px',
+                            '@card-head-padding': '8px',
+                            '@border-radius-base': '4px',
+                            // '@arrow-border-radius': '8px',
                             '@typography-title-font-weight': '350',
                         },
                         javascriptEnabled: true,

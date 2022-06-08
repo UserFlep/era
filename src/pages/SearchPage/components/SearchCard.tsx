@@ -1,27 +1,8 @@
 import React, { FC } from 'react';
 import classes from "./styles/search-card.module.less"
-import {Badge, Button, Card, Checkbox, Collapse, Dropdown, Image, Menu, Space, Tag} from "antd";
-import {MoreOutlined} from "@ant-design/icons"
+import {Badge, Card, Checkbox, Collapse, Image, Space, Tag} from "antd";
 
 
-const menu = (
-    <Menu
-        items={[
-            {
-                label: '1st menu item',
-                key: '1',
-            },
-            {
-                label: '2nd menu item',
-                key: '2',
-            },
-            {
-                label: '3rd menu item',
-                key: '3',
-            },
-        ]}
-    />
-);
 
 interface IProps {
     imageUri: string
@@ -29,10 +10,8 @@ interface IProps {
 
 const SearchCard: FC<IProps> = ({imageUri}) => {
     return (
-        <Badge count={<Checkbox></Checkbox>}>
+        <Badge count={<Checkbox className="big-checkbox"></Checkbox>} offset={[-14,12]}>
             <Card className={classes.card} bodyStyle={{padding: 2}} hoverable
-                  title={<Checkbox></Checkbox>}
-                  extra={<Dropdown overlay={menu} trigger={["click"]}><MoreOutlined style={{fontSize: 22}} /></Dropdown>}
                   cover={<Image preview={{maskClassName: classes.mask}} src={imageUri}/>}
             >
                 <Space direction="vertical" style={{width: "100%"}}>
