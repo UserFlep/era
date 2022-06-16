@@ -2,7 +2,8 @@ import {Checkbox, Collapse, Segmented, Space} from 'antd';
 import React, {FC, useState} from 'react';
 import {forceBlocks, IOption} from "./data"
 const {Panel} = Collapse;
-//console.log(forceBlocks)
+
+console.log(forceBlocks)
 
 const SEGMENTED_OPTIONS = forceBlocks.map(block => block.forceName)
 //type optionsT = typeof SEGMENTED_OPTIONS[number]
@@ -42,7 +43,7 @@ const CollapseFilters:FC = () => {
             {
                 forceBlocks.filter(block => block.forceName === segmentedValue).map((block) => {
                     return (
-                        <CollapseElement key={block.forceName} options={block.data}/>
+                        <CollapseElement key={block.forceName} options={block.options}/>
                     )
                 })
             }

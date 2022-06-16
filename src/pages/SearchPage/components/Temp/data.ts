@@ -8,13 +8,13 @@ interface IOption {
 
 interface IForce {
     forceName: string
-    data: IOption[]
+    options: IOption[]
 }
 
 interface ITagResponce {
     id: id,
     name: string,
-    parent?: ITagResponce | null
+    parentId?: id | null
 }
 
 interface IResponce {
@@ -23,479 +23,311 @@ interface IResponce {
     }
 }
 
+
 export const responce:IResponce = {
     "data": {
         "tags": [
             {
                 "id": "1",
-                "name": "Морское базирование",
-                "parent": null
+                "name": "Морские",
+                "parentId": null
             },
             {
                 "id": "2",
-                "name": "Сухопутное базирование",
-                "parent": null
+                "name": "Сухопутные",
+                "parentId": null
             },
             {
                 "id": "3",
-                "name": "Воздушное базирование",
-                "parent": null
+                "name": "Воздушные",
+                "parentId": null
             },
             {
                 "id": "4",
                 "name": "Авианосец",
-                "parent": {
-                    "id": "1",
-                    "name": "Морские"
-                }
+                "parentId": "1"
             },
             {
                 "id": "5",
                 "name": "Десантный корабль",
-                "parent": {
-                    "id": "1",
-                    "name": "Морские"
-                }
+                "parentId": "1"
             },
             {
                 "id": "6",
                 "name": "Патрульный корабль",
-                "parent": {
-                    "id": "1",
-                    "name": "Морские"
-                }
+                "parentId": "1"
             },
             {
                 "id": "7",
                 "name": "Эскадренный миноносец (Эсминец)",
-                "parent": {
-                    "id": "1",
-                    "name": "Морские"
-                }
+                "parentId": "1"
             },
             {
                 "id": "8",
                 "name": "Корабль противоминной обороны",
-                "parent": {
-                    "id": "1",
-                    "name": "Морские"
-                }
+                "parentId": "1"
             },
             {
                 "id": "9",
                 "name": "Подводная лодка",
-                "parent": {
-                    "id": "1",
-                    "name": "Морские"
-                }
+                "parentId": "1"
             },
             {
                 "id": "10",
                 "name": "Бронетехника",
-                "parent": {
-                    "id": "2",
-                    "name": "Сухопутные"
-                }
+                "parentId": "2"
             },
             {
                 "id": "11",
                 "name": "Транспорт",
-                "parent": {
-                    "id": "2",
-                    "name": "Сухопутные"
-                }
+                "parentId": "2"
             },
             {
                 "id": "12",
                 "name": "Ракетный комплекс",
-                "parent": {
-                    "id": "2",
-                    "name": "Сухопутные"
-                }
+                "parentId": "2"
             },
             {
                 "id": "13",
                 "name": "Артиллерия",
-                "parent": {
-                    "id": "2",
-                    "name": "Сухопутные"
-                }
+                "parentId": "2"
             },
             {
                 "id": "14",
                 "name": "Средство ПВО и ПРО",
-                "parent": {
-                    "id": "2",
-                    "name": "Сухопутные"
-                }
+                "parentId": "2"
             },
             {
                 "id": "15",
                 "name": "Санитарная машина",
-                "parent": {
-                    "id": "2",
-                    "name": "Сухопутные"
-                }
+                "parentId": "2"
             },
             {
                 "id": "16",
                 "name": "Средство разведки и целеуказния",
-                "parent": {
-                    "id": "2",
-                    "name": "Сухопутные"
-                }
+                "parentId": "2"
             },
             {
                 "id": "17",
                 "name": "Инженерно-сапёрная техника",
-                "parent": {
-                    "id": "2",
-                    "name": "Сухопутные"
-                }
+                "parentId": "2"
             },
             {
                 "id": "18",
                 "name": "Танк",
-                "parent": {
-                    "id": "10",
-                    "name": "Бронетехника"
-                }
+                "parentId": "10"
             },
             {
                 "id": "19",
                 "name": "Боевая машина пехоты(БМП)",
-                "parent": {
-                    "id": "10",
-                    "name": "Бронетехника"
-                }
+                "parentId": "10"
             },
             {
                 "id": "20",
                 "name": "Бронетранспортёр(БТР)",
-                "parent": {
-                    "id": "10",
-                    "name": "Бронетехника"
-                }
+                "parentId": "10"
             },
             {
                 "id": "21",
                 "name": "Автомобиль",
-                "parent": {
-                    "id": "11",
-                    "name": "Транспорт"
-                }
+                "parentId": "11"
             },
             {
                 "id": "22",
                 "name": "Грузовик",
-                "parent": {
-                    "id": "11",
-                    "name": "Транспорт"
-                }
+                "parentId": "11"
             },
             {
                 "id": "23",
                 "name": "Ударный",
-                "parent": {
-                    "id": "12",
-                    "name": "Ракетный комплекс"
-                }
+                "parentId": "12"
             },
             {
                 "id": "24",
                 "name": "Cпециального применения",
-                "parent": {
-                    "id": "12",
-                    "name": "Ракетный комплекс"
-                }
+                "parentId": "12"
             },
             {
                 "id": "25",
                 "name": "Тактический",
-                "parent": {
-                    "id": "23",
-                    "name": "Ударный"
-                }
+                "parentId": "23"
             },
             {
                 "id": "26",
                 "name": "Оперативно-тактический",
-                "parent": {
-                    "id": "23",
-                    "name": "Ударный"
-                }
+                "parentId": "23"
             },
             {
                 "id": "27",
                 "name": "Стратегический",
-                "parent": {
-                    "id": "23",
-                    "name": "Ударный"
-                }
+                "parentId": "23"
             },
             {
                 "id": "28",
                 "name": "Зенитный",
-                "parent": {
-                    "id": "24",
-                    "name": "Cпециального применения"
-                }
+                "parentId": "24"
             },
             {
                 "id": "29",
                 "name": "Противоракетный",
-                "parent": {
-                    "id": "24",
-                    "name": "Cпециального применения"
-                }
+                "parentId": "24"
             },
             {
                 "id": "30",
                 "name": "Противотанковый",
-                "parent": {
-                    "id": "24",
-                    "name": "Cпециального применения"
-                }
+                "parentId": "24"
             },
             {
                 "id": "31",
                 "name": "Противокорабельный",
-                "parent": {
-                    "id": "24",
-                    "name": "Cпециального применения"
-                }
+                "parentId": "24"
             },
             {
                 "id": "32",
                 "name": "Противолодочный",
-                "parent": {
-                    "id": "24",
-                    "name": "Cпециального применения"
-                }
+                "parentId": "24"
             },
             {
                 "id": "33",
                 "name": "Самоходная артиллерийская установка",
-                "parent": {
-                    "id": "13",
-                    "name": "Артиллерия"
-                }
+                "parentId": "13"
             },
             {
                 "id": "34",
                 "name": "Буксируемая артиллерийская установка (гаубица)",
-                "parent": {
-                    "id": "13",
-                    "name": "Артиллерия"
-                }
+                "parentId": "13"
             },
             {
                 "id": "35",
                 "name": "Реактивная система залпового огня",
-                "parent": {
-                    "id": "13",
-                    "name": "Артиллерия"
-                }
+                "parentId": "13"
             },
             {
                 "id": "36",
                 "name": "Миномёт",
-                "parent": {
-                    "id": "13",
-                    "name": "Артиллерия"
-                }
+                "parentId": "13"
             },
             {
                 "id": "37",
                 "name": "Самолет",
-                "parent": {
-                    "id": "3",
-                    "name": "Воздушные"
-                }
+                "parentId": "3"
             },
             {
                 "id": "38",
                 "name": "Вертолет",
-                "parent": {
-                    "id": "3",
-                    "name": "Воздушные"
-                }
+                "parentId": "3"
             },
             {
                 "id": "39",
                 "name": "БПЛА",
-                "parent": {
-                    "id": "3",
-                    "name": "Воздушные"
-                }
+                "parentId": "3"
             },
             {
                 "id": "40",
                 "name": "Военно-транспортный",
-                "parent": {
-                    "id": "37",
-                    "name": "Самолет"
-                }
+                "parentId": "37"
             },
             {
                 "id": "41",
                 "name": "Разведывательный",
-                "parent": {
-                    "id": "37",
-                    "name": "Самолет"
-                }
+                "parentId": "37"
             },
             {
                 "id": "42",
                 "name": "Радиоэлектронной борьбы",
-                "parent": {
-                    "id": "37",
-                    "name": "Самолет"
-                }
+                "parentId": "37"
             },
             {
                 "id": "43",
                 "name": "Учебно-тренировочный",
-                "parent": {
-                    "id": "37",
-                    "name": "Самолет"
-                }
+                "parentId": "37"
             },
             {
                 "id": "44",
                 "name": "Заправщик",
-                "parent": {
-                    "id": "37",
-                    "name": "Самолет"
-                }
+                "parentId": "37"
             },
             {
                 "id": "45",
                 "name": "Боевой",
-                "parent": {
-                    "id": "37",
-                    "name": "Самолет"
-                }
+                "parentId": "37"
             },
             {
                 "id": "46",
                 "name": "Метеорологический",
-                "parent": {
-                    "id": "37",
-                    "name": "Самолет"
-                }
+                "parentId": "37"
             },
             {
                 "id": "47",
                 "name": "Бомбардировщик",
-                "parent": {
-                    "id": "45",
-                    "name": "Боевой"
-                }
+                "parentId": "45"
             },
             {
                 "id": "48",
                 "name": "Истребитель",
-                "parent": {
-                    "id": "45",
-                    "name": "Боевой"
-                }
+                "parentId": "45"
             },
             {
                 "id": "49",
                 "name": "Штурмовик",
-                "parent": {
-                    "id": "45",
-                    "name": "Боевой"
-                }
+                "parentId": "45"
             },
             {
                 "id": "50",
                 "name": "Боевой",
-                "parent": {
-                    "id": "38",
-                    "name": "Вертолет"
-                }
+                "parentId": "38"
             },
             {
                 "id": "51",
                 "name": "Грузовой",
-                "parent": {
-                    "id": "38",
-                    "name": "Вертолет"
-                }
+                "parentId": "38"
             },
             {
                 "id": "52",
                 "name": "Радиоэлектронной борьбы",
-                "parent": {
-                    "id": "38",
-                    "name": "Вертолет"
-                }
+                "parentId": "38"
             },
             {
                 "id": "53",
                 "name": "Универсальный",
-                "parent": {
-                    "id": "38",
-                    "name": "Вертолет"
-                }
+                "parentId": "38"
             },
             {
                 "id": "54",
                 "name": "Поисково-спасательный",
-                "parent": {
-                    "id": "38",
-                    "name": "Вертолет"
-                }
+                "parentId": "38"
             },
             {
                 "id": "55",
                 "name": "Учебно-тренировочный",
-                "parent": {
-                    "id": "38",
-                    "name": "Вертолет"
-                }
+                "parentId": "38"
             },
             {
                 "id": "56",
                 "name": "Тейлситтер",
-                "parent": {
-                    "id": "39",
-                    "name": "БПЛА"
-                }
+                "parentId": "39"
             },
             {
                 "id": "57",
                 "name": "Автожир",
-                "parent": {
-                    "id": "39",
-                    "name": "БПЛА"
-                }
+                "parentId": "39"
             },
             {
                 "id": "58",
                 "name": "Коптер (мультикоптер)",
-                "parent": {
-                    "id": "39",
-                    "name": "БПЛА"
-                }
+                "parentId": "39"
             },
             {
                 "id": "59",
                 "name": "Барражирующий боеприпас",
-                "parent": {
-                    "id": "39",
-                    "name": "БПЛА"
-                }
+                "parentId": "39"
             }
         ]
     }
 }
 
-
 const getChildren = (res:IResponce,tag:ITagResponce):ITagResponce[] | undefined=>{
-    return res?.data?.tags?.filter((el:ITagResponce)=>el?.parent?.id === tag?.id)
+    return res?.data?.tags?.filter((el:ITagResponce)=>el?.parentId === tag?.id)
 }
 
 const getOptions = (res:IResponce,tag:ITagResponce):IOption[] | undefined=>{
@@ -511,16 +343,16 @@ const getBlocksFromResponce = (res:IResponce)=>{
     const tagBlocks:IForce[]=[]
 
     for(const tag of res.data.tags){
-        if(tag?.parent === null) {
-            const children = getChildren(responce, tag)
+        if(tag?.parentId === null) {
+            const children = getChildren(res, tag)
             if (children?.length===0) {
-                tagBlocks.push({forceName: tag.name, data: []})
+                tagBlocks.push({forceName: tag.name, options: []})
                 continue
             }
             const tagBlock: IForce = {
                 forceName: tag.name,
                 // @ts-ignore
-                data: children?.map((child) => ({id: child.id, name: child.name, options: getOptions(responce, child)}))
+                options: children?.map((child) => ({id: child.id, name: child.name, options: getOptions(responce, child)}))
 
             }
             tagBlocks.push(tagBlock)
@@ -538,6 +370,7 @@ export type {
     IResponce
 }
 export const forceBlocks:IForce[] = getBlocksFromResponce(responce)
+
 
 
 
