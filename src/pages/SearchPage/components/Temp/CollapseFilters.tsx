@@ -3,28 +3,29 @@ import React, {FC, useState} from 'react';
 import {forceBlocks, IOption} from "./data"
 const {Panel} = Collapse;
 
-console.log(forceBlocks)
+//console.log(forceBlocks)
 
 const SEGMENTED_OPTIONS = forceBlocks.map(block => block.forceName)
 //type optionsT = typeof SEGMENTED_OPTIONS[number]
 
 interface IElementProps{
-    options: IOption[]
+    options?: IOption[]
 }
 
 const CollapseElement:FC<IElementProps> = ({options})=> {
     return (
         <Collapse accordion>
             {
-                options?.map((option:any) => {
-                    const hasOptions: boolean = option.options?.length !== 0
+                options?.map((option) => {
+                    const hasOptions: boolean = option?.children?.length !== 0
+
                     return (
                         hasOptions ?
-                            <Panel showArrow={hasOptions} header={<Checkbox>{option.name}</Checkbox>} key={option.id}>
-                                <CollapseElement options={option.options}/>
+                            <Panel showArrow={hasOptions} header={<Checkbox>{option.title}</Checkbox>} key={option.key}>
+                                <CollapseElement options={option?.children}/>
                             </Panel>
                             :
-                            <Panel collapsible="disabled" showArrow={hasOptions} header={<Checkbox>{option.name}</Checkbox>} key={option.id}/>
+                            <Panel collapsible="disabled" showArrow={hasOptions} header={<Checkbox>{option.title}</Checkbox>} key={option.key}/>
                     )
                 })
             }
@@ -43,7 +44,7 @@ const CollapseFilters:FC = () => {
             {
                 forceBlocks.filter(block => block.forceName === segmentedValue).map((block) => {
                     return (
-                        <CollapseElement key={block.forceName} options={block.options}/>
+                        <CollapseElement key={block?.forceName} options={block?.options}/>
                     )
                 })
             }

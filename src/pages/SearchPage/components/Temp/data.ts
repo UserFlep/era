@@ -1,45 +1,21 @@
-type id = string | number
+import {IOption, IForce, ITagResponse, IResponse} from "../../../../types/option"
 
-interface IOption {
-    id: id,
-    name: string,
-    options?: IOption[] | [] | null | undefined
-}
-
-interface IForce {
-    forceName: string
-    options: IOption[]
-}
-
-interface ITagResponce {
-    id: id,
-    name: string,
-    parentId?: id | null
-}
-
-interface IResponce {
-    data: {
-        tags: ITagResponce[]
-    }
-}
-
-
-export const responce:IResponce = {
+export const response:IResponse = {
     "data": {
         "tags": [
             {
                 "id": "1",
-                "name": "Морские",
+                "name": "Морское базирование",
                 "parentId": null
             },
             {
                 "id": "2",
-                "name": "Сухопутные",
+                "name": "Сухопутное базирование",
                 "parentId": null
             },
             {
                 "id": "3",
-                "name": "Воздушные",
+                "name": "Воздушное базирование",
                 "parentId": null
             },
             {
@@ -326,20 +302,20 @@ export const responce:IResponce = {
     }
 }
 
-const getChildren = (res:IResponce,tag:ITagResponce):ITagResponce[] | undefined=>{
-    return res?.data?.tags?.filter((el:ITagResponce)=>el?.parentId === tag?.id)
+const getChildren = (res:IResponse,tag:ITagResponse):ITagResponse[] | undefined=>{
+    return res?.data?.tags?.filter((el:ITagResponse)=>el?.parentId === tag?.id)
 }
 
-const getOptions = (res:IResponce,tag:ITagResponce):IOption[] | undefined=>{
+const getOptions = (res:IResponse,tag:ITagResponse):IOption[]=>{
     const options: IOption[] = []
     const children = getChildren(res,tag)
     if(children !== null){
-        children?.map(child=>options.push({id: child.id, name: child.name, options: getOptions(res,child)}))
+        children?.map(child=>options.push({key: child.id, title: child.name, children: getOptions(res,child)}))
     }
     return options
 }
 
-const getBlocksFromResponce = (res:IResponce)=>{
+const getBlocksFromResponse = (res:IResponse)=>{
     const tagBlocks:IForce[]=[]
 
     for(const tag of res.data.tags){
@@ -352,7 +328,7 @@ const getBlocksFromResponce = (res:IResponce)=>{
             const tagBlock: IForce = {
                 forceName: tag.name,
                 // @ts-ignore
-                options: children?.map((child) => ({id: child.id, name: child.name, options: getOptions(responce, child)}))
+                options: children?.map((child) => ({key: child.id, title: child.name, children: getOptions(response, child)}))
 
             }
             tagBlocks.push(tagBlock)
@@ -363,13 +339,12 @@ const getBlocksFromResponce = (res:IResponce)=>{
 
 
 export type {
-    id,
     IOption,
     IForce,
-    ITagResponce,
-    IResponce
+    ITagResponse,
+    IResponse
 }
-export const forceBlocks:IForce[] = getBlocksFromResponce(responce)
+export const forceBlocks:IForce[] = getBlocksFromResponse(response)
 
 
 

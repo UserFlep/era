@@ -19,7 +19,7 @@ import temp18 from "./temp (18).png";
 import temp19 from "./temp (19).png";
 import temp20 from "./temp (20).png";
 
-export default [
+const tempImages = [
     // temp1,
     // temp2,
     // temp3,
@@ -41,3 +41,5 @@ export default [
     temp19,
     temp20,
 ];
+
+export default tempImages
