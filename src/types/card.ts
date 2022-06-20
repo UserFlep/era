@@ -1,7 +1,7 @@
-type  key= string|number
+import React from "react"
 
 export interface ICard {
-    id: key,
+    id: React.Key,
     cardTitle: string,
     icon: string
 }
