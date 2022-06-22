@@ -1,6 +1,13 @@
 import {types, onSnapshot, Instance} from "mobx-state-tree";
 import { createContext, useContext } from "react";
 import {OptionStore} from "./Option";
+import {useQuery} from "@apollo/client";
+import {GET_TAGS} from "../../requests/option/Query";
+
+// const { loading, error, data } = useQuery(GET_TAGS, {
+//     fetchPolicy: 'network-only', // Used for first execution
+//     nextFetchPolicy: 'cache-first', // Used for subsequent executions
+// });
 
 const RootModel = types
     .model({

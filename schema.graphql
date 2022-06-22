@@ -1,0 +1,77 @@
+# This file was generated based on ".graphqlconfig". Do not edit manually.
+
+schema {
+    query: Query
+    mutation: Mutation
+    subscription: Subscription
+}
+
+type File {
+    fileSize: String!
+    id: ID!
+    imageSize: String
+    mimetype: String!
+    subtype: String!
+    tags: [Tag]
+    type: String!
+    url: String!
+}
+
+type FilePayload {
+    query: Query
+    record: File!
+    recordId: ID!
+}
+
+type Mutation {
+    _: Boolean
+    addFiles(input: CreateFileInput!): [FilePayload!]!
+    addTag(input: [CreateTagInput!]!): [TagPayload!]!
+    removeFiles(id: [ID!]!): Int!
+    removeTag(id: [ID!]!): Int!
+    updateTag(input: [UpdateTagInput!]!): [TagPayload!]!
+}
+
+type Query {
+    _: Boolean
+    file(id: ID!): File!
+    files: [File!]!
+    tag(id: ID!): Tag!
+    tags: [Tag!]!
+}
+
+type Subscription {
+    _: Boolean
+}
+
+type Tag {
+    id: ID!
+    name: String!
+    parent: Tag
+    parentId: ID
+}
+
+type TagPayload {
+    query: Query
+    record: Tag!
+    recordId: ID!
+}
+
+"The `Upload` scalar type represents a file upload."
+scalar Upload
+
+input CreateFileInput {
+    files: [Upload!]!
+    tagIds: [String!]!
+}
+
+input CreateTagInput {
+    name: String!
+    parentId: ID
+}
+
+input UpdateTagInput {
+    id: ID!
+    name: String
+    parentId: ID
+}
