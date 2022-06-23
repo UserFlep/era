@@ -43,9 +43,7 @@ const RootModel = types
 
 let initialState = RootModel.create({
     optionStore: {
-        checkList: {},
-        optionList: [],
-        optionBlocksList: {}
+        optionBlocksList: []
     }
 });
 

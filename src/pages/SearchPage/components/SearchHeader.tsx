@@ -1,6 +1,5 @@
 import React, {FC} from 'react';
 import {PageHeader, Space} from "antd";
-//import CheckboxBlocks from "./CheckboxBlocks";
 import TagList from "./TagList";
 import CompleteInput from "./CompleteInput";
 import CollapseFilters from "./CollapseFilters";
@@ -10,7 +9,6 @@ const SearchHeader: FC = () => (
             <Space direction="vertical" style={{width: "100%"}}>
                 <TagList/>
                 <CompleteInput/>
-                {/*<CheckboxBlocks/>*/}
                 <CollapseFilters/>
             </Space>
         </PageHeader>

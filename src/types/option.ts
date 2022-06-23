@@ -3,17 +3,14 @@ import {Key} from "react";
 export interface IOption {
     key: Key,
     title: string,
-    children?: IOption[]
-}
-
-export interface ICheck {
-    key: Key,
-    checked: boolean
+    checked: boolean,
+    children?: IOption[],
 }
 
 export interface IForce {
+    key: Key
     forceName: string
-    options: IOption[]
+    options?: IOption[]
 }
 
 export interface ITagResponse {
@@ -22,8 +19,3 @@ export interface ITagResponse {
     parentId?: Key | null
 }
 
-export interface IResponse {
-    data: {
-        tags: ITagResponse[]
-    }
-}
