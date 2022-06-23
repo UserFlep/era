@@ -1,4 +1,4 @@
-import {IOption, IForce, ITagResponse, IResponse} from "../../../../types/option"
+import {IOption, IForce, ITagResponse, IResponse} from "../../../types/option"
 
 export const response:IResponse = {
     "data": {

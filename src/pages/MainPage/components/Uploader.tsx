@@ -2,8 +2,7 @@ import classes from "./styles/uploader.module.less"
 import React, {FC, useState} from 'react';
 import {Modal, Button, Tooltip, Divider} from 'antd';
 import {UploadOutlined} from "@ant-design/icons"
-import CheckboxBlocks from "../../SearchPage/components/CheckboxBlocks";
-import TagCreator from "./TagCreator";
+// import TagCreator from "./TagCreator";
 import TagList from "../../SearchPage/components/TagList";
 import CompleteInput from "../../SearchPage/components/CompleteInput";
 import UploadDragger from "./UploadDragger";
@@ -65,7 +64,7 @@ const Uploader: FC = () => {
 
                 {/*<Divider/>*/}
                 {/*Блоки выбора тегов*/}
-                <CheckboxBlocks/>
+                {/*<CheckboxBlocks/>*/}
                 <Divider/>
 
                 {/*/!*Создание тегов*!/*/}

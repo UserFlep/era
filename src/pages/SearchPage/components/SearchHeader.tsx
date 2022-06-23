@@ -3,7 +3,7 @@ import {PageHeader, Space} from "antd";
 //import CheckboxBlocks from "./CheckboxBlocks";
 import TagList from "./TagList";
 import CompleteInput from "./CompleteInput";
-import CollapseFilters from "./Temp/CollapseFilters";
+import CollapseFilters from "./CollapseFilters";
 
 const SearchHeader: FC = () => (
         <PageHeader style={{paddingTop:0}}>

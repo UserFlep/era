@@ -1,3 +1,4 @@
+// import styles from "./styles/collapse-filters.module.less"
 import {Checkbox, Collapse, Segmented, Space} from 'antd';
 import React, {FC, useState} from 'react';
 import {forceBlocks, IOption} from "./data"
