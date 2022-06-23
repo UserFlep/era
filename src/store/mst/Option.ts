@@ -12,6 +12,17 @@ export const CheckItem = types
         },
     }))
 
+export const CheckItem = types
+    .model({
+        key: types.identifier,
+        checked: types.optional(types.boolean, false),
+    })
+    .actions(self => ({
+        toggle(){
+            self.checked = !self.checked
+        },
+    }))
+
 export const Option:any = types
     .model({
         key: types.identifier,
