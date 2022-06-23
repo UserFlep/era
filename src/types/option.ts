@@ -3,7 +3,6 @@ import {Key} from "react";
 export interface IOption {
     key: Key,
     title: string,
-    checked: boolean,
     children?: IOption[],
 }
 

@@ -15,50 +15,33 @@ import {getBlocksFromResponse, ITagResponse} from "../../pages/SearchPage/compon
 //     }))
 
 
-// children: types.maybe(types.array(types.reference(types.late(() => Option)))),
+export const Check:any = types
+    .model({
+        id: types.identifier,
+        name: types.string,
+    })
+
+
 export const Option:any = types
     .model({
-        key: types.identifier,
-        title: types.optional(types.string, ""),
-        checked: types.optional(types.boolean, false),
-        children: types.maybe(types.array(types.reference(types.late(() => Option)))),
+        id: types.identifier,
+        name: types.string,
+        parentId: types.maybeNull(types.string),
     })
     .actions(self => ({
-        setTitle(newTitle: string){
-            self.title = newTitle
-        },
-        toggle(){
-            self.checked = !self.checked
-        },
-    }))
-
-export const OptionBlock:any = types
-    .model({
-        key: types.identifier,
-        forceName: types.optional(types.string, ""),
-        options: types.maybe(types.array(Option)),
-    })
-    .actions(self => ({
-        setForceName(newName: string){
-            self.forceName = newName
+        setName(newName: string){
+            self.name = newName
         },
     }))
 
 export const OptionStore:any = types
     .model({
-        optionBlocksList: types.optional(types.array(OptionBlock),[]),
+        checkList: types.optional(types.map(Check),{}),
+        optionList: types.optional(types.array(Option),[]),
     })
     .actions(self => ({
-        setOptionBlocksList(dbOptions: ITagResponse[]){
-            console.log("53 Options.ts mst",getBlocksFromResponse(dbOptions))
-            // self.optionBlocksList.clear()
-            const dbBlocks = getBlocksFromResponse(dbOptions)
-            self.optionBlocksList.push({key: dbBlocks[1].key, forceName:dbBlocks[1].forceName, options:dbBlocks[1].options})
-            // dbBlocks.forEach(({key, forceName,options})=>{
-            //     console.log("begin")
-            // self.optionBlocksList.push({key, forceName, options})
-            //     console.log("end")
-            // })
+        setOptionList(dbOptions: ITagResponse[]){
+            self.optionList = dbOptions
         },
         addOption(title: string, parentId: Key){
             //Добавляется запрос асинхронно в бд
@@ -75,6 +58,6 @@ export const OptionStore:any = types
     }))
     .views(self => ({
         get getOptionBlocksList(){
-            return self.optionBlocksList;
+            return getBlocksFromResponse(self.optionList)
         },
     }))
