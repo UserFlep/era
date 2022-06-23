@@ -1,10 +1,14 @@
-import React, {Key} from "react";
+import {Key} from "react";
 
 export interface IOption {
     key: Key,
     title: string,
-    checked?: boolean
     children?: IOption[]
+}
+
+export interface ICheck {
+    key: Key,
+    checked: boolean
 }
 
 export interface IForce {
