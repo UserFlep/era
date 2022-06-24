@@ -1,10 +1,11 @@
 import React, {FC} from 'react';
 import {observer} from "mobx-react-lite";
-import {useStore} from "../../../context";
+import {values} from "mobx";
 import {Button, Tag, Tooltip, Typography} from "antd";
 import classes from "./styles/tag-list.module.less";
 import {blue} from "@ant-design/colors";
 import {CloseCircleFilled} from "@ant-design/icons";
+import {useMst} from "../../../store/mst/Root";
 
 interface IProps {
     prefix?: string
@@ -12,44 +13,44 @@ interface IProps {
 
 const TagList: FC<IProps> = observer(({prefix="Ключевые слова:"}) => {
 
-    const {checkStore} = useStore()
-    const {checkedList, setCheckedList} = checkStore
+    const {optionStore} = useMst()
 
-    const tagCloseHandler = (removedTag: string) => {
-        setCheckedList(checkedList.filter((el:string) => el !== removedTag))
+    const tagCloseHandler = (tag: any) => {
+        optionStore.checkToggle(tag.key, tag.title)
     }
 
     return (
-        <div style={{height: 24}}>
-            {!!checkedList.length ?
+        <div style={{minHeight: 24}}>
+            {!!optionStore.checkedList.size ?
                 <Typography.Text type="secondary" >{prefix + " "}</Typography.Text>
                 :
                 null
             }
-            {checkedList.map((tag: string, index: number) => {
-                const isLongTag = tag.length > 20;
+            {values(optionStore.checkedList).map((tag:any) => {
+                const isLongTag = tag.title.length > 20;
                 const tagElement = (
                     <Tag
-                        key={tag}
+                        key={tag.key}
                         className={classes.tag}
                         color={blue.primary}
                         closable
                         onClose={() => tagCloseHandler(tag)}
                     >
-                        {isLongTag ? `${tag.slice(0, 20)}...` : tag}
+                        {isLongTag ? `${tag.title.slice(0, 20)}...` : tag.title}
                     </Tag>
                 )
                 return isLongTag
-                    ? <Tooltip key={tag} title={tag}>{tagElement}</Tooltip>
+                    ? <Tooltip key={tag.key} title={tag.title}>{tagElement}</Tooltip>
                     : tagElement;
             })}
+
             {/*  Кнопка очистки  */}
-            {!!checkedList.length &&
+            {!!optionStore.checkedList.size &&
                 <Button
                     type="link"
                     size="small"
                     icon={<CloseCircleFilled className={classes.btnIcon}/>}
-                    onClick={() => setCheckedList([])}
+                    onClick={() => optionStore.clearOptionList()}
                 />
             }
         </div>

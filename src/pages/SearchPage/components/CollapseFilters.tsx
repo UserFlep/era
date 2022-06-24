@@ -1,25 +1,24 @@
 // import styles from "./styles/collapse-filters.module.less"
 import {Checkbox, Collapse, Segmented, Space} from 'antd';
-import React, {FC,Key, useEffect, useState} from 'react';
-import {getBlocksFromResponse, IOption, IForce} from "./data"
+import React, {FC, useEffect, useState} from 'react';
+import {IOption, IForce} from "./data"
 import {useQuery} from "@apollo/client";
 import { GET_TAGS } from '../../../requests/option/Query';
 import {useMst} from "../../../store/mst/Root"
 import {observer} from "mobx-react-lite";
 const {Panel} = Collapse;
 
-//type optionsT = typeof SEGMENTED_OPTIONS[number]
-
 interface IElementProps{
-    options?: IOption[]
+    options?: IOption[],
+    optionStore: any
 }
 
-const CollapseElement:FC<IElementProps> = observer(({options})=> {
-    const {optionStore} = useMst()
-    const toggleHandler = (option: any)=>{
-        // optionStore.checkList.has(option.key) ?
+const CollapseElement:FC<IElementProps> = observer(({options, optionStore})=> {
 
+    const toggleHandler = (option: IOption)=>{
+        optionStore.checkToggle(option.key, option.title)
     }
+
     return (
         <Collapse accordion>
             {
@@ -28,11 +27,11 @@ const CollapseElement:FC<IElementProps> = observer(({options})=> {
 
                     return (
                         hasOptions ?
-                            <Panel showArrow={hasOptions} header={<Checkbox onChange={()=>toggleHandler(option)}>{option.title}</Checkbox>} key={option.key}>
-                                <CollapseElement options={option?.children}/>
+                            <Panel showArrow={hasOptions} header={<span><Checkbox checked={optionStore.checkedList.has(option.key)} onChange={()=>toggleHandler(option)}>{option.title}</Checkbox></span>} key={option.key}>
+                                <CollapseElement options={option?.children} optionStore={optionStore}/>
                             </Panel>
                             :
-                            <Panel collapsible="disabled" showArrow={hasOptions} header={<Checkbox onChange={toggleHandler}>{option.title}</Checkbox>} key={option.key}/>
+                            <Panel collapsible="disabled" showArrow={hasOptions} header={<span><Checkbox checked={optionStore.checkedList.has(option.key)} onChange={()=>toggleHandler(option)}>{option.title}</Checkbox></span>} key={option.key}/>
                     )
                 })
             }
@@ -44,7 +43,7 @@ const CollapseElement:FC<IElementProps> = observer(({options})=> {
 const CollapseFilters:FC = observer(() => {
 
     const {optionStore} = useMst()
-    const { loading, error, data } = useQuery(GET_TAGS);
+    const {loading, error, data } = useQuery(GET_TAGS);
 
     const [segmentedValue, setSegmentedValue] = useState<string | number>();
     const [forceBlocks, setForceBlocks] = useState<IForce[]>([])
@@ -52,15 +51,15 @@ const CollapseFilters:FC = observer(() => {
 
     useEffect(()=>{
         if(data) {
-            optionStore.setOptionBlocksList(data.tags)
-
-            // const newForceBlocks = getBlocksFromResponse(data)
-            // const newSegOptions = newForceBlocks.map((block:IForce) => block.forceName)
-            //
-            // setSegOptions(newSegOptions)
-            // setForceBlocks(newForceBlocks)
+            optionStore.setOptionList(data.tags)
+            const newForceBlocks = optionStore.getOptionBlocksList
+            const newSegOptions = newForceBlocks.map((block:IForce) => block.forceName)
+            setSegOptions(newSegOptions)
+            setSegmentedValue(newSegOptions[0] ?? [])
+            setForceBlocks(newForceBlocks)
         }
-    },[data])
+        console.log("useEffect--->Data fetching")
+    },[data, optionStore])
 
     return (
         loading ?
@@ -74,7 +73,7 @@ const CollapseFilters:FC = observer(() => {
                     {
                         forceBlocks.filter((block:any) => block.forceName === segmentedValue).map((block:any) => {
                             return (
-                                <CollapseElement key={block?.forceName} options={block?.options}/>
+                                <CollapseElement key={block?.forceName} options={block?.options} optionStore={optionStore}/>
                             )
                         })
                     }

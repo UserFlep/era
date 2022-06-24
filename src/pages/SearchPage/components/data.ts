@@ -309,7 +309,7 @@ const getOptions = (res:ITagResponse[],tag:ITagResponse):IOption[]=>{
     const options: IOption[] = []
     const children = getChildren(res,tag)
     if(children !== null){
-        children?.map(child=>options.push({key: child.id, title: child.name, checked: false, children: getOptions(res,child)}))
+        children?.map(child=>options.push({key: child.id, title: child.name, children: getOptions(res,child)}))
     }
     return options
 }
@@ -327,7 +327,7 @@ export const getBlocksFromResponse = (res:ITagResponse[])=>{
             const tagBlock: IForce = {
                 key: tag.id,
                 forceName: tag.name,
-                options: children?.map((child) => ({key: child.id, title: child.name, checked: false, children: getOptions(res, child)}))
+                options: children?.map((child) => ({key: child.id, title: child.name, children: getOptions(res, child)}))
 
             }
             tagBlocks.push(tagBlock)

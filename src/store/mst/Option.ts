@@ -15,10 +15,10 @@ import {getBlocksFromResponse, ITagResponse} from "../../pages/SearchPage/compon
 //     }))
 
 
-export const Check:any = types
+export const CheckedItem:any = types
     .model({
-        id: types.identifier,
-        name: types.string,
+        key: types.identifier,
+        title: types.string,
     })
 
 
@@ -34,14 +34,26 @@ export const Option:any = types
         },
     }))
 
+////////////////////////////////////////////////////////////////////
+const CheckedListType = types.map(CheckedItem)
+const OptionListType = types.array(Option)
+
 export const OptionStore:any = types
     .model({
-        checkList: types.optional(types.map(Check),{}),
-        optionList: types.optional(types.array(Option),[]),
+        checkedList: CheckedListType,
+        optionList: OptionListType,
     })
     .actions(self => ({
+        checkToggle(key: any, title: string ){
+            self.checkedList.has(key) ?
+                self.checkedList.delete(key):
+                self.checkedList.set(key, {key,title})
+        },
         setOptionList(dbOptions: ITagResponse[]){
-            self.optionList = dbOptions
+            self.optionList = OptionListType.create(dbOptions)
+        },
+        clearOptionList(){
+            self.checkedList.clear()
         },
         addOption(title: string, parentId: Key){
             //Добавляется запрос асинхронно в бд
@@ -58,6 +70,14 @@ export const OptionStore:any = types
     }))
     .views(self => ({
         get getOptionBlocksList(){
+            console.log("getOptionBlocksList")
             return getBlocksFromResponse(self.optionList)
         },
+        get getCheckedList(){
+            return self.checkedList
+        },
+        get getOptionList(){
+            return self.optionList
+        },
+
     }))
