@@ -1,4 +1,4 @@
-import classes from "../styles/breadcrumb.module.css"
+import classes from "./root-breadcrumb.module.less"
 import React, {FC} from 'react';
 import {Breadcrumb, Button, Space, Tooltip} from "antd";
 import {ArrowLeftOutlined} from "@ant-design/icons";

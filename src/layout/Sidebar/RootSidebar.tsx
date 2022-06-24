@@ -1,4 +1,4 @@
-import classes from "../styles/sidebar.module.css"
+import classes from "./root-sidebar.module.less"
 import React, {FC} from 'react';
 import {Menu, Layout} from "antd";
 import {

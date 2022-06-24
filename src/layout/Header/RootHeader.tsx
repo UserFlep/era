@@ -1,4 +1,4 @@
-import classes from "../styles/header.module.css"
+import classes from "./root-header.module.less"
 import React, {FC} from 'react';
 import Era from "../../images/era-logo.png";
 import {Menu, Layout} from "antd";
