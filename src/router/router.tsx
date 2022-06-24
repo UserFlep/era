@@ -2,7 +2,7 @@ import React, {FC} from 'react';
 import {Route, Routes} from "react-router-dom";
 import MainPage from "../pages/MainPage/MainPage";
 import SearchPage from "../pages/SearchPage/SearchPage";
-import RootLayout from "../layout";
+import RootLayout from "../layout/RootLayout";
 
 const Router: FC = () => {
     return (

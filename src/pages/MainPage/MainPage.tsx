@@ -1,16 +1,16 @@
 //import classes from "./main-page.module.less"
 import React, {FC} from 'react';
-import {hydroAcousticCards, imageCards, radioInfoCards, speechAndTextCards} from "./data/cardData";
-import CardRow from "./components/CardRow";
+import {hydroAcousticCards, imageCards, radioInfoCards, speechAndTextCards} from "./data";
+import CardBlock from "../../components/CardBlock/CardBlock";
 
 const MainPage: FC = () => {
 
     return (
         <div>
-            <CardRow cardData={imageCards}/>
-            <CardRow cardData={radioInfoCards}/>
-            <CardRow cardData={hydroAcousticCards}/>
-            <CardRow cardData={speechAndTextCards}/>
+            <CardBlock cardData={imageCards}/>
+            <CardBlock cardData={radioInfoCards}/>
+            <CardBlock cardData={hydroAcousticCards}/>
+            <CardBlock cardData={speechAndTextCards}/>
         </div>
     );
 };

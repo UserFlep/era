@@ -1,14 +1,14 @@
 import {observer} from "mobx-react-lite";
 import React, {FC, ReactNode} from "react";
 import {AutoComplete, Input} from "antd";
-import classes from "./styles/complete-input.module.less";
-import {useMst} from "../../../context"
+import classes from "./search-input.module.less";
+import {useMst} from "../../context"
 
 interface IProps {
     enterButton?: ReactNode
 }
 
-const CompleteInput: FC<IProps> = observer(({enterButton, ...params})=>{
+const SearchInput: FC<IProps> = observer(({enterButton, ...params})=>{
 
     const [completeValue, setCompleteValue] = React.useState('')
 
@@ -48,4 +48,4 @@ const CompleteInput: FC<IProps> = observer(({enterButton, ...params})=>{
     );
 })
 
-export default CompleteInput;
+export default SearchInput;

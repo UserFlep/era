@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import classes from "./styles/search-card.module.less"
+import classes from "./search-card.module.less"
 import {Badge, Card, Checkbox, Collapse, Image, Space, Tag} from "antd";
 
 
