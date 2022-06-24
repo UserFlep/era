@@ -1,6 +1,6 @@
 import {types} from "mobx-state-tree"
 import {Key} from "react"
-import {getBlocksFromResponse, ITagResponse} from "../../pages/SearchPage/components/data";
+import {getBlocksFromResponse, ITagResponse} from "../pages/SearchPage/components/data";
 
 // export const Option:any = types
 //     .model({

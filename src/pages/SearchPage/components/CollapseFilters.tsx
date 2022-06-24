@@ -4,7 +4,7 @@ import React, {FC, useEffect, useState} from 'react';
 import {IOption, IForce} from "./data"
 import {useQuery} from "@apollo/client";
 import { GET_TAGS } from '../../../requests/option/Query';
-import {useMst} from "../../../store/mst/Root"
+import {useMst} from "../../../context"
 import {observer} from "mobx-react-lite";
 const {Panel} = Collapse;
 

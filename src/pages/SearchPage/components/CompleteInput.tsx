@@ -2,7 +2,7 @@ import {observer} from "mobx-react-lite";
 import React, {FC, ReactNode} from "react";
 import {AutoComplete, Input} from "antd";
 import classes from "./styles/complete-input.module.less";
-import {useMst} from "../../../store/mst/Root";
+import {useMst} from "../../../context"
 
 interface IProps {
     enterButton?: ReactNode

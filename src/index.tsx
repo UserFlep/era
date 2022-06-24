@@ -2,8 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.less';
 import App from './App';
-import { StoreProvider } from './context';
-import {Provider, rootStore} from "./store/mst/Root";
+import {MSTProvider} from './context';
 import {
     ApolloClient,
     InMemoryCache,
@@ -25,11 +24,9 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
       <ApolloProvider client={client}>
-          <Provider value={rootStore}>{/*Закомментировать*/}
-              <StoreProvider>
-                <App />
-              </StoreProvider>
-          </Provider>{/*Закомментировать*/}
+          <MSTProvider>
+              <App />
+          </MSTProvider>
       </ApolloProvider>
   </React.StrictMode>
 );

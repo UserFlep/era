@@ -1,19 +1,21 @@
-import React, {createContext, FC} from 'react'
-import checkStore from '../store/checkStore';
-import fileStore from '../store/fileStore';
-import {useLocalObservable} from "mobx-react-lite";
-
-const StoreContext = createContext<any>(null)
+import React, {createContext, FC, useContext} from 'react'
+import {RootInstance, rootStore} from "../store/Root";
 
 
-export const StoreProvider:FC<any> = ({children}) => {
-    const store = useLocalObservable(()=>({
-        checkStore,
-        fileStore
-    }))
+const RootStoreContext = createContext<null | RootInstance>(null);
 
-    return <StoreContext.Provider value={store}>{children}</StoreContext.Provider>
-
+export function useMst() {
+    const store = useContext(RootStoreContext);
+    if (store === null) {
+        throw new Error("Store не может быть пустым, добавь context provider");
+    }
+    return store;
 }
 
-export const useStore = () => React.useContext(StoreContext)
+export const MSTProvider:FC<any> = ({children}) => {
+    return (
+        <RootStoreContext.Provider value={rootStore}>
+            {children}
+        </RootStoreContext.Provider>
+    )
+}

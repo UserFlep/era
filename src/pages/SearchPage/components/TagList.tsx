@@ -5,7 +5,7 @@ import {Button, Tag, Tooltip, Typography} from "antd";
 import classes from "./styles/tag-list.module.less";
 import {blue} from "@ant-design/colors";
 import {CloseCircleFilled} from "@ant-design/icons";
-import {useMst} from "../../../store/mst/Root";
+import {useMst} from "../../../context"
 
 interface IProps {
     prefix?: string
