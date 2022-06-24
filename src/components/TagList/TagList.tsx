@@ -2,10 +2,10 @@ import React, {FC} from 'react';
 import {observer} from "mobx-react-lite";
 import {values} from "mobx";
 import {Button, Tag, Tooltip, Typography} from "antd";
-import classes from "./styles/tag-list.module.less";
+import classes from "./tag-list.module.less";
 import {blue} from "@ant-design/colors";
 import {CloseCircleFilled} from "@ant-design/icons";
-import {useMst} from "../../../context"
+import {useMst} from "../../context"
 
 interface IProps {
     prefix?: string

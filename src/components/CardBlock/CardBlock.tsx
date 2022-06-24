@@ -1,14 +1,14 @@
 import React, {FC} from 'react';
 import {Card, Col, Row, Typography} from "antd"
-import Uploader from "./Uploader";
+import UploadModal from "../UploadModal/UploadModal";
 import {Link} from "react-router-dom";
-import {ICardsBlock} from "../../../types/card"
+import {ICardsBlock} from "../../types/card"
 
 interface IProps{
     cardData: ICardsBlock
 }
 
-const CardRow: FC<IProps> = ({cardData}) => {
+const CardBlock: FC<IProps> = ({cardData}) => {
 
     return (
         <>
@@ -22,7 +22,7 @@ const CardRow: FC<IProps> = ({cardData}) => {
                             title={<div>{card.cardTitle}</div>}
                             hoverable={true}
                             size="small"
-                            extra={<Uploader/>}
+                            extra={<UploadModal/>}
                         >
                             <Link to="/search" style={{display: "flex", alignItems: "center", justifyContent: "center", height: "152px"}}>
                                 <img style={{maxWidth: "100%", maxHeight: "150px"}} src={card.icon} alt="картинка"/>
@@ -35,4 +35,4 @@ const CardRow: FC<IProps> = ({cardData}) => {
     );
 };
 
-export default CardRow;
+export default CardBlock;

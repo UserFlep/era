@@ -1,10 +1,10 @@
-// import styles from "./styles/collapse-filters.module.less"
+// import classes from "./styles/tag-block-list.module.less"
 import {Checkbox, Collapse, Segmented, Space} from 'antd';
 import React, {FC, useEffect, useState} from 'react';
-import {IOption, IForce} from "./data"
+import {IOption, IForce} from "../../types/option"
 import {useQuery} from "@apollo/client";
-import { GET_TAGS } from '../../../requests/option/Query';
-import {useMst} from "../../../context"
+import { GET_TAGS } from '../../requests/option/Query';
+import {useMst} from "../../context"
 import {observer} from "mobx-react-lite";
 const {Panel} = Collapse;
 
@@ -40,7 +40,7 @@ const CollapseElement:FC<IElementProps> = observer(({options, optionStore})=> {
 })
 
 
-const CollapseFilters:FC = observer(() => {
+const TagBlockList:FC = observer(() => {
 
     const {optionStore} = useMst()
     const {loading, error, data } = useQuery(GET_TAGS);
@@ -84,4 +84,4 @@ const CollapseFilters:FC = observer(() => {
     );
 });
 
-export default CollapseFilters;
+export default TagBlockList;

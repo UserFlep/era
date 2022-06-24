@@ -1,13 +1,12 @@
-import classes from "./styles/uploader.module.less"
+import classes from "./upload-modal.module.less"
 import React, {FC, useState} from 'react';
 import {Modal, Button, Tooltip, Divider} from 'antd';
 import {UploadOutlined} from "@ant-design/icons"
-// import TagCreator from "./TagCreator";
-import TagList from "../../SearchPage/components/TagList";
-import CompleteInput from "../../SearchPage/components/CompleteInput";
+import TagList from "../TagList/TagList";
+import SearchInput from "../SearchInput/SearchInput";
 import UploadDragger from "./UploadDragger";
 
-const Uploader: FC = () => {
+const UploadModal: FC = () => {
     const [modalVisible, setModalVisible] = useState<boolean>(false)
     const [previewVisible, setPreviewVisible] = useState<boolean>(false)
     const [previewImage, setPreviewImage] = useState<string>('')
@@ -70,11 +69,11 @@ const Uploader: FC = () => {
                 {/*/!*Создание тегов*!/*/}
                 {/*<TagCreator/>*/}
                 {/*Инпут поиска тегов с автодополнением*/}
-                <CompleteInput enterButton={<div>Добавить ключевое слово</div>}/>
+                <SearchInput enterButton={<div>Добавить ключевое слово</div>}/>
 
             </Modal>
         </div>
     );
 }
 
-export default Uploader
+export default UploadModal

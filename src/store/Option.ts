@@ -1,26 +1,13 @@
 import {types} from "mobx-state-tree"
 import {Key} from "react"
-import {getBlocksFromResponse, ITagResponse} from "../pages/SearchPage/components/data";
-
-// export const Option:any = types
-//     .model({
-//         key: types.identifier,
-//         title: types.optional(types.string, ""),
-//         children: types.maybe(types.map(types.reference(types.late(() => Option)))),
-//     })
-//     .actions(self => ({
-//         setTitle(newTitle: string){
-//             self.title = newTitle
-//         },
-//     }))
-
+import {getBlocksFromResponse} from "../pages/SearchPage/data";
+import {ITagResponse} from "../types/option"
 
 export const CheckedItem:any = types
     .model({
         key: types.identifier,
         title: types.string,
     })
-
 
 export const Option:any = types
     .model({
