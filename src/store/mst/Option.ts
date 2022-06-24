@@ -69,15 +69,18 @@ export const OptionStore:any = types
         }
     }))
     .views(self => ({
+        get getOptionList(){
+            return self.optionList
+        },
         get getOptionBlocksList(){
             console.log("getOptionBlocksList")
             return getBlocksFromResponse(self.optionList)
         },
+        get getInputOptionList(){
+            return self.optionList.filter((el:any)=>(el.name.slice(-1)!=="й")).map((el:any)=>({key: el.id, value: el.name}))
+        },
         get getCheckedList(){
             return self.checkedList
-        },
-        get getOptionList(){
-            return self.optionList
         },
 
     }))
