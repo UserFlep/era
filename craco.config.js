@@ -7,12 +7,15 @@ module.exports = {
             options: {
                 lessLoaderOptions: {
                     lessOptions: {
+                        //https://github.com/ant-design/ant-design/blob/master/components/style/themes/default.less
                         modifyVars: {
+                            //Root
                             '@primary-color': '#1890ff',
+                            '@border-radius-base': '6px',
+                            //Card
                             '@card-padding-base': '12px',
                             '@card-head-padding': '8px',
-                            '@border-radius-base': '4px',
-                            // '@arrow-border-radius': '8px',
+                            //Typography
                             '@typography-title-font-weight': '350',
                         },
                         javascriptEnabled: true,
