@@ -14,7 +14,7 @@ const getChildren = (parentId:React.Key):IOption[]=>{
 }
 
 //Главная функция
-export const getTreeDataResponse = (res:ITagResponse[])=>{
+export const getTreeDataFromResponse = (res:ITagResponse[])=>{
     RESPONSE_DATA = res;
     const treeData:IOption[]=[]
     for(const tag of RESPONSE_DATA){

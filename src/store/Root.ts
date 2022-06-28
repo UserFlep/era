@@ -1,15 +1,14 @@
 import {types, onSnapshot, Instance} from "mobx-state-tree";
-import {OptionStore} from "./Option";
+import {TagStore} from "./Tag";
 
 const RootModel = types
     .model({
-        optionStore: OptionStore
+        tagStore: TagStore
     })
 
 const initialState = RootModel.create({
-    optionStore: {
-        checkedList: {},
-        optionList: [],
+    tagStore: {
+        selectedItems: [],
     }
 });
 

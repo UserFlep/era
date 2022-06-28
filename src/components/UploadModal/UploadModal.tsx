@@ -2,8 +2,8 @@ import classes from "./upload-modal.module.less"
 import React, {FC, useState} from 'react';
 import {Modal, Button, Tooltip, Divider} from 'antd';
 import {UploadOutlined} from "@ant-design/icons"
-import TagList from "../TagList/TagList";
-import SearchInput from "../SearchInput/SearchInput";
+// import TagList from "../TagList/TagList";
+// import SearchInput from "../SearchInput/SearchInput";
 import UploadDragger from "./UploadDragger";
 
 const UploadModal: FC = () => {
@@ -59,7 +59,7 @@ const UploadModal: FC = () => {
 
                 <Divider/>
                 {/*Список тегов*/}
-                <TagList/>
+                {/*<TagList/>*/}
 
                 {/*<Divider/>*/}
                 {/*Блоки выбора тегов*/}
@@ -69,7 +69,7 @@ const UploadModal: FC = () => {
                 {/*/!*Создание тегов*!/*/}
                 {/*<TagCreator/>*/}
                 {/*Инпут поиска тегов с автодополнением*/}
-                <SearchInput enterButton={<div>Добавить ключевое слово</div>}/>
+                {/*<SearchInput enterButton={<div>Добавить ключевое слово</div>}/>*/}
 
             </Modal>
         </div>
