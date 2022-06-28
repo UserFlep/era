@@ -1,11 +1,14 @@
 import {Image, Layout, PageHeader, Space} from 'antd';
 import React, {FC} from 'react';
 import classes from "./search.module.less"
-import TagList from "../../components/TagList/TagList";
-import SearchInput from "../../components/SearchInput/SearchInput";
-import TagBlockList from "../../components/TagBlockList/TagBlockList";
+// import TagList from "../../components/TagList/TagList";
+// import SearchInput from "../../components/SearchInput/SearchInput";
+// import TagBlockList from "../../components/TagBlockList/TagBlockList";
 import tempImages from "../../images/temp/images";
 import SearchCard from "../../components/SearchCard/SearchCard";
+import TreeSelectInput from "../../components/TreeSelectInput/TreeSelectInput";
+
+
 
 const SearchPage: FC = () => {
     return (
@@ -14,9 +17,10 @@ const SearchPage: FC = () => {
 
                 <PageHeader style={{paddingTop:0}}>
                     <Space direction="vertical" style={{width: "100%"}}>
-                        <TagList/>
-                        <SearchInput/>
-                        <TagBlockList/>
+                        {/*<SearchInput/>*/}
+                        {/*<TagList/>*/}
+                        {/*<TagBlockList/>*/}
+                        <TreeSelectInput/>
                     </Space>
                 </PageHeader>
 

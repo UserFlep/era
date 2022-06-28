@@ -1,43 +1,12 @@
 // import classes from "./styles/tag-block-list.module.less"
-import {Checkbox, Collapse, Segmented, Space} from 'antd';
+import {Segmented, Space} from 'antd';
 import React, {FC, useEffect, useState} from 'react';
-import {IOption, IForce} from "../../types/option"
+import {IForce} from "../../types/option"
 import {useQuery} from "@apollo/client";
 import { GET_TAGS } from '../../requests/option/Query';
 import {useMst} from "../../context"
 import {observer} from "mobx-react-lite";
-const {Panel} = Collapse;
-
-interface IElementProps{
-    options?: IOption[],
-    optionStore: any
-}
-
-const CollapseElement:FC<IElementProps> = observer(({options, optionStore})=> {
-
-    const toggleHandler = (option: IOption)=>{
-        optionStore.checkToggle(option.key, option.title)
-    }
-
-    return (
-        <Collapse accordion>
-            {
-                options?.map((option) => {
-                    const hasOptions: boolean = option?.children?.length !== 0
-
-                    return (
-                        hasOptions ?
-                            <Panel showArrow={hasOptions} header={<span><Checkbox checked={optionStore.checkedList.has(option.key)} onChange={()=>toggleHandler(option)}>{option.title}</Checkbox></span>} key={option.key}>
-                                <CollapseElement options={option?.children} optionStore={optionStore}/>
-                            </Panel>
-                            :
-                            <Panel collapsible="disabled" showArrow={hasOptions} header={<span><Checkbox checked={optionStore.checkedList.has(option.key)} onChange={()=>toggleHandler(option)}>{option.title}</Checkbox></span>} key={option.key}/>
-                    )
-                })
-            }
-        </Collapse>
-    )
-})
+import TagBlockListItem from "../TagBlockListItem/TagBlockListItem";
 
 
 const TagBlockList:FC = observer(() => {
@@ -47,7 +16,7 @@ const TagBlockList:FC = observer(() => {
 
     const [segmentedValue, setSegmentedValue] = useState<string | number>();
     const [forceBlocks, setForceBlocks] = useState<IForce[]>([])
-    const [segOptions, setSegOptions] = useState<any>([])
+    const [segOptions, setSegOptions] = useState<string[]>([])
 
     useEffect(()=>{
         if(data) {
@@ -73,7 +42,7 @@ const TagBlockList:FC = observer(() => {
                     {
                         forceBlocks.filter((block:any) => block.forceName === segmentedValue).map((block:any) => {
                             return (
-                                <CollapseElement key={block?.forceName} options={block?.options} optionStore={optionStore}/>
+                                <TagBlockListItem key={block?.forceName} options={block?.options}/>
                             )
                         })
                     }
