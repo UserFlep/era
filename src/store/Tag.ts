@@ -1,7 +1,5 @@
 import {types} from "mobx-state-tree"
 import {Key} from "react"
-import {getBlocksFromResponse} from "../pages/SearchPage/data";
-import {ITagResponse} from "../types/option"
 
 
 const selectedItemsType = types.array(types.string)

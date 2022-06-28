@@ -2,7 +2,7 @@ import {Tag, TreeSelect} from 'antd';
 import React, {useEffect} from 'react';
 import { getTreeDataFromResponse } from '../../pages/SearchPage/utils';
 import {useQuery} from "@apollo/client";
-import {GET_TAGS} from "../../requests/option/Query";
+import {GET_TAGS} from "../../requests/tag/Query";
 import {useMst} from "../../context";
 import {blue} from "@ant-design/colors";
 import {IOption} from "../../types/option";
