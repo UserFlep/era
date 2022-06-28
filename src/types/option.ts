@@ -6,12 +6,6 @@ export interface IOption {
     children?: IOption[],
 }
 
-export interface IForce {
-    key: Key
-    forceName: string
-    options?: IOption[]
-}
-
 export interface ITagResponse {
     id: Key,
     name: string,

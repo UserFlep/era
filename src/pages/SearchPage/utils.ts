@@ -2,6 +2,8 @@ import {IOption, ITagResponse} from "../../types/option"
 import React from "react";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 //***ПРеобразование серверных данных в валидные для antd Tree ***
+//***ITagResponse[] в IOption[]***
+
 let RESPONSE_DATA: ITagResponse[] = []
 
 const getChildren = (parentId:React.Key):IOption[]=>{
@@ -14,8 +16,8 @@ const getChildren = (parentId:React.Key):IOption[]=>{
 }
 
 //Главная функция
-export const getTreeDataFromResponse = (res:ITagResponse[])=>{
-    RESPONSE_DATA = res;
+export const getTreeDataFromResponse = (response:ITagResponse[])=>{
+    RESPONSE_DATA = response;
     const treeData:IOption[]=[]
     for(const tag of RESPONSE_DATA){
         if(tag?.parentId === null) {
