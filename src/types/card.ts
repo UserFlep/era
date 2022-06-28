@@ -6,7 +6,6 @@ export interface ICard {
     icon: string
 }
 
-
 export interface ICardsBlock {
     title: string,
     cards: ICard[]
