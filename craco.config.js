@@ -7,6 +7,7 @@ module.exports = {
             options: {
                 lessLoaderOptions: {
                     lessOptions: {
+                        //Дефолтные значения
                         //https://github.com/ant-design/ant-design/blob/master/components/style/themes/default.less
                         modifyVars: {
                             //Root
