@@ -1,5 +1,5 @@
 import React, {FC} from 'react';
-import styles from "./card-block.module.less"
+import classes from "./card-block.module.less"
 import {Card, Col, Row, Typography} from "antd"
 import UploadModal from "../UploadModal/UploadModal";
 import {Link} from "react-router-dom";
@@ -15,18 +15,18 @@ const CardBlock: FC<IProps> = ({cardData}) => {
         <>
             <Typography.Title level={3}>{cardData.title}</Typography.Title>
 
-            <Row gutter={[16,16]} className={styles.row}>
+            <Row gutter={[16,16]} className={classes.row}>
                 {cardData.cards.map(card=>(
-                    <Col span={4} key={card.id} className={styles.col}>
+                    <Col span={4} key={card.id} className={classes.col}>
                         <Card
-                            className={styles.card}
+                            className={classes.card}
                             title={<div>{card.cardTitle}</div>}
                             hoverable={true}
                             size="small"
                             extra={<UploadModal/>}
                         >
-                            <Link to="/search" className={styles.link}>
-                                <img className={styles.img} src={card.icon} alt="картинка"/>
+                            <Link to="/search" className={classes.link}>
+                                <img className={classes.img} src={card.icon} alt="картинка"/>
                             </Link>
                         </Card>
                     </Col>

@@ -11,12 +11,12 @@ interface IProps {
 const SearchCard: FC<IProps> = ({imageUri}) => {
     return (
         <Badge count={<Checkbox className="big-checkbox"></Checkbox>} offset={[-14,12]}>
-            <Card className={classes.card} bodyStyle={{padding: 2}} hoverable
+            <Card className={classes.card} hoverable
                   cover={<Image preview={{maskClassName: classes.mask}} src={imageUri}/>}
             >
-                <Space direction="vertical" style={{width: "100%"}}>
-                    <Collapse ghost style={{padding: 0}}>
-                        <Collapse.Panel key="1" style={{padding: 0}} header={
+                <Space direction="vertical">
+                    <Collapse ghost>
+                        <Collapse.Panel key="1" header={
                             <Space className={classes.cardInfo}>
                                 <label className={classes.info}>PNG - 1280x720 - 600KB</label>
                                 <Tag>IMG</Tag>
