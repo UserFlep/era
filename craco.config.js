@@ -18,6 +18,8 @@ module.exports = {
                             '@card-head-padding': '8px',
                             //Typography
                             '@typography-title-font-weight': '350',
+                            //Collapse
+                            '@collapse-header-padding': '2px',
                         },
                         javascriptEnabled: true,
                     },
