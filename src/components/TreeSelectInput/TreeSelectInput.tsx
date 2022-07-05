@@ -1,37 +1,19 @@
-import {Button, TreeSelect} from 'antd';
+import {Tag, TreeSelect} from 'antd';
 import React, {useEffect} from 'react';
 import classes from "./tree-select-input.module.less"
-import { PlusOutlined, DeleteOutlined} from '@ant-design/icons';
 import type { DefaultOptionType } from 'antd/es/select'
 import {useQuery} from "@apollo/client";
 import {GET_TAGS} from "../../requests/tag/Query";
 import {useMst} from "../../context";
+import {blue} from "@ant-design/colors";
 import { observer } from 'mobx-react-lite';
+import TreeNodeContent from './TreeNodeContent';
 
-interface INodeProps {
-    title: string
-}
-const TreeNodeContent: React.FC<INodeProps> = ({title})=>{
-    const mouseEnterHandler = ()=>{
-
-    }
-    const mouseLeaveHandler = ()=>{
-
-    }
-    return (
-        <div style={{display: "flex", justifyContent: "space-between", alignItems: "center"}} onMouseEnter={mouseEnterHandler} onMouseLeave={mouseLeaveHandler}>
-            <span>{title}</span>
-            <div>
-                <Button type="text" size={"small"} icon={<PlusOutlined style={{color: "#8c8c8c"}}/>}></Button>
-                <Button type="text" size={"small"} icon={<DeleteOutlined/>} danger></Button>
-            </div>
-        </div>
-    )
-}
 
 interface IProps {
     maxTagCount?: number | 'responsive'
 }
+
 const TreeSelectInput:React.FC<IProps> = observer(({maxTagCount="responsive"}) => {
     const {tagStore} = useMst()
     const {loading, error, data } = useQuery(GET_TAGS);
@@ -46,24 +28,42 @@ const TreeSelectInput:React.FC<IProps> = observer(({maxTagCount="responsive"}) =
     },[data])
 
     const onChange = (newValue: string[]) => {
+        console.log(newValue)
         tagStore.setSelectedList(newValue);
     };
 
+    const tagRender = (props:any) => {
+        const {label:{props:{title}}, value, closable, onClose } = props;
+
+        //Чтоб не раскрывался список при нажатии на тег
+        const onPreventMouseDown = (event: React.MouseEvent<HTMLSpanElement>) => {
+            event.preventDefault();
+            event.stopPropagation();
+        };
+
+        return (
+            <Tag key={value} color={blue.primary} onMouseDown={onPreventMouseDown} closable={closable} onClose={onClose}>
+                {title}
+            </Tag>
+        );
+    }
+
     return (
         <TreeSelect
-            status={error ? "warning" : undefined}
             className={classes.treeSelect}
-            showSearch
-            showCheckedStrategy={"SHOW_ALL"}
-            value={tagStore.selectedItems}
-            placeholder={loading ? "Получение данных..." : error ? "Ошибка получения данных!" : "Поиск по ключевым словам"}
-            treeDataSimpleMode
-            treeData={treeData}
-            filterTreeNode
-            treeNodeFilterProp="title"
-            maxTagCount={maxTagCount}
             allowClear
+            showSearch
             multiple
+            filterTreeNode
+            treeDataSimpleMode
+            maxTagCount={maxTagCount}
+            showCheckedStrategy={"SHOW_ALL"}
+            placeholder={loading ? "Получение данных..." : error ? "Ошибка получения данных!" : "Поиск по ключевым словам"}
+            status={error ? "warning" : undefined}
+            treeData={treeData}
+            value={tagStore.selectedItems}
+            tagRender={tagRender}
+            treeNodeFilterProp="title"
             onChange={onChange}
         />
     );
