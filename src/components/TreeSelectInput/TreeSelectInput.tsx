@@ -1,12 +1,13 @@
 import React, {useEffect} from 'react';
 import classes from "./tree-select-input.module.less"
-import {TreeSelect} from 'antd';
+import {Spin, TreeSelect} from 'antd';
 import type {DisplayValueType } from 'rc-select/lib/BaseSelect';
 import type { DefaultOptionType } from 'antd/es/select'
 import {useQuery} from "@apollo/client";
 import {GET_TAGS} from "../../requests/tag/Query";
 import {useMst} from "../../context";
 import { observer } from 'mobx-react-lite';
+import type { InputStatus } from 'antd/lib/_util/statusUtils';
 
 interface IProps {
     maxTagCount?: number | 'responsive'
@@ -33,11 +34,11 @@ const TreeSelectInput:React.FC<IProps> = observer(({maxTagCount="responsive"}) =
     //omittedValues - теги не вместившиеся в строку input-а
     //titleLineNumber - количество элементов в строке всплывающего окна при наведении на "+7..."
     const maxTagPlaceholderHandler = (omittedValues: DisplayValueType[], titleLineNumber = 3)=>{
-        const lengths = omittedValues.length;
+        const length = omittedValues.length;
         const title = omittedValues
             .map((item, index: number) => {
                 let parameter = item.label;
-                if (index !== lengths - 1) {
+                if (index !== length - 1) {
                     if ((index + 1) % titleLineNumber === 0) {
                         parameter += `,\n`;
                     } else {
@@ -47,10 +48,9 @@ const TreeSelectInput:React.FC<IProps> = observer(({maxTagCount="responsive"}) =
                 return parameter;
             }).join("")
         return (
-            <span title={title}
-            >
+            <span title={title}>
                 <span>+</span>
-                <span style={{ margin: "0 5px" }}>{omittedValues.length}</span>
+                <span className={classes.omittedLabelSpan}>{omittedValues.length}</span>
                 <span>...</span>
             </span>
         )
@@ -59,6 +59,8 @@ const TreeSelectInput:React.FC<IProps> = observer(({maxTagCount="responsive"}) =
     return (
         <TreeSelect
             className={classes.treeSelect}
+            placeholder={loading ? "Получение данных..." : error ? "Ошибка получения данных!" : "Поиск по ключевым словам"}
+            status={loading ? "warning" : error ? "error" : ""}
             allowClear
             showSearch
             multiple
@@ -67,8 +69,6 @@ const TreeSelectInput:React.FC<IProps> = observer(({maxTagCount="responsive"}) =
             maxTagCount={maxTagCount}
             maxTagPlaceholder={maxTagPlaceholderHandler}
             showCheckedStrategy={"SHOW_ALL"}
-            placeholder={loading ? "Получение данных..." : error ? "Ошибка получения данных!" : "Поиск по ключевым словам"}
-            status={error ? "warning" : undefined}
             treeData={treeData}
             value={tagStore.selectedItems}
             treeNodeFilterProp="title"
