@@ -1,14 +1,12 @@
-import {Tag, TreeSelect} from 'antd';
 import React, {useEffect} from 'react';
 import classes from "./tree-select-input.module.less"
+import {TreeSelect} from 'antd';
+import type {DisplayValueType } from 'rc-select/lib/BaseSelect';
 import type { DefaultOptionType } from 'antd/es/select'
 import {useQuery} from "@apollo/client";
 import {GET_TAGS} from "../../requests/tag/Query";
 import {useMst} from "../../context";
-import {blue} from "@ant-design/colors";
 import { observer } from 'mobx-react-lite';
-import TreeNodeContent from './TreeNodeContent';
-
 
 interface IProps {
     maxTagCount?: number | 'responsive'
@@ -21,31 +19,41 @@ const TreeSelectInput:React.FC<IProps> = observer(({maxTagCount="responsive"}) =
 
     useEffect(()=>{
         if(data) {
-            const newTreeData = data.tags?.map((el:any)=>({id: el.id, pId: el.parentId, value: el.id, title: <TreeNodeContent title={el.name}/>}))
+            const newTreeData = data.tags?.map((el:any)=>({id: el.id, pId: el.parentId, value: el.id, title: el.name}))
             setTreeData(newTreeData)
         }
         console.log("useEffect--->Data fetching")
     },[data])
 
     const onChange = (newValue: string[]) => {
-        console.log(newValue)
         tagStore.setSelectedList(newValue);
     };
 
-    const tagRender = (props:any) => {
-        const {label:{props:{title}}, value, closable, onClose } = props;
 
-        //Чтоб не раскрывался список при нажатии на тег
-        const onPreventMouseDown = (event: React.MouseEvent<HTMLSpanElement>) => {
-            event.preventDefault();
-            event.stopPropagation();
-        };
-
+    //omittedValues - теги не вместившиеся в строку input-а
+    //titleLineNumber - количество элементов в строке всплывающего окна при наведении на "+7..."
+    const maxTagPlaceholderHandler = (omittedValues: DisplayValueType[], titleLineNumber = 3)=>{
+        const lengths = omittedValues.length;
+        const title = omittedValues
+            .map((item, index: number) => {
+                let parameter = item.label;
+                if (index !== lengths - 1) {
+                    if ((index + 1) % titleLineNumber === 0) {
+                        parameter += `,\n`;
+                    } else {
+                        parameter += ", ";
+                    }
+                }
+                return parameter;
+            }).join("")
         return (
-            <Tag key={value} color={blue.primary} onMouseDown={onPreventMouseDown} closable={closable} onClose={onClose}>
-                {title}
-            </Tag>
-        );
+            <span title={title}
+            >
+                <span>+</span>
+                <span style={{ margin: "0 5px" }}>{omittedValues.length}</span>
+                <span>...</span>
+            </span>
+        )
     }
 
     return (
@@ -57,12 +65,12 @@ const TreeSelectInput:React.FC<IProps> = observer(({maxTagCount="responsive"}) =
             filterTreeNode
             treeDataSimpleMode
             maxTagCount={maxTagCount}
+            maxTagPlaceholder={maxTagPlaceholderHandler}
             showCheckedStrategy={"SHOW_ALL"}
             placeholder={loading ? "Получение данных..." : error ? "Ошибка получения данных!" : "Поиск по ключевым словам"}
             status={error ? "warning" : undefined}
             treeData={treeData}
             value={tagStore.selectedItems}
-            tagRender={tagRender}
             treeNodeFilterProp="title"
             onChange={onChange}
         />
