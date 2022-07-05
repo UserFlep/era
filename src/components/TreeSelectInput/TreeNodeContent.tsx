@@ -1,6 +1,6 @@
 import React from 'react';
 import classes from "./tree-select-input.module.less"
-import {Button} from "antd";
+import {Button, Tooltip} from "antd";
 import {DeleteOutlined, PlusOutlined} from "@ant-design/icons";
 
 interface IProps {
@@ -19,8 +19,12 @@ const TreeNodeContent:React.FC<IProps> = ({title}) => {
             <span>{title}</span>
             { visible &&
                 <div className={classes.btnContainer}>
-                    <Button type="text" size={"small"} icon={<PlusOutlined className={classes.addBtn}/>}></Button>
-                    <Button type="text" size={"small"} icon={<DeleteOutlined className={classes.removeBtn}/>}></Button>
+                    <Tooltip title="Добавить дочерний элемент">
+                        <Button type="text" size={"small"} icon={<PlusOutlined className={classes.addBtn}/>}></Button>
+                    </Tooltip>
+                    <Tooltip title="Удалить">
+                        <Button type="text" size={"small"} icon={<DeleteOutlined className={classes.removeBtn}/>}></Button>
+                    </Tooltip>
                 </div>
             }
         </div>
