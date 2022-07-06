@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+import classes from "./upload-modal.module.less"
 import {DownloadOutlined, InboxOutlined} from "@ant-design/icons";
 import type { RcFile, UploadProps } from 'antd/es/upload';
 import type { UploadFile } from 'antd/es/upload/interface';
@@ -35,7 +36,7 @@ const UploadDragger: FC<IProps> = ({setPreviewImage, setPreviewVisible, setPrevi
 
     return (
         <Upload.Dragger
-            style={{marginBottom: '8px'}}
+            className={classes.dragger}
             multiple
             // action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
             listType="picture-card"
@@ -47,7 +48,6 @@ const UploadDragger: FC<IProps> = ({setPreviewImage, setPreviewVisible, setPrevi
             onPreview={handlePreview}
             onChange={handleDraggerChange}
         >
-            {/*{fileList.length >= 8 ? null : uploadButton}*/}
             <p className="ant-upload-drag-icon">
                 <InboxOutlined/>
             </p>
