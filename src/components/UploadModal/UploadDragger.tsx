@@ -37,7 +37,7 @@ const UploadDragger: FC<IProps> = ({setPreviewImage, setPreviewVisible, setPrevi
         <Upload.Dragger
             className={classes.dragger}
             multiple
-            beforeUpload={() => false} //фильтр на upload файлы, false - успех, true - ошибка
+            // beforeUpload={() => false} //фильтр на upload файлы, false - успех, true - ошибка
             listType="picture-card"
             fileList={fileList}
             onPreview={handlePreview}

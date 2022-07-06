@@ -1,13 +1,12 @@
 import React, {useEffect} from 'react';
 import classes from "./tree-select-input.module.less"
-import {Spin, TreeSelect} from 'antd';
+import {TreeSelect} from 'antd';
 import type {DisplayValueType } from 'rc-select/lib/BaseSelect';
 import type { DefaultOptionType } from 'antd/es/select'
 import {useQuery} from "@apollo/client";
 import {GET_TAGS} from "../../requests/tag/Query";
 import {useMst} from "../../context";
 import { observer } from 'mobx-react-lite';
-import type { InputStatus } from 'antd/lib/_util/statusUtils';
 
 interface IProps {
     maxTagCount?: number | 'responsive'

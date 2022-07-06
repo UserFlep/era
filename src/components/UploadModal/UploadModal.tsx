@@ -5,6 +5,8 @@ import {UploadOutlined} from "@ant-design/icons"
 import UploadDragger from "./UploadDragger";
 import TreeSelectInput from "../TreeSelectInput/TreeSelectInput";
 import {UploadFile} from "antd/es/upload/interface";
+import { useMutation } from "@apollo/client";
+import {ADD_FILES} from "../../requests/file/Mutation";
 
 const UploadModal: FC = () => {
     const [modalVisible, setModalVisible] = useState<boolean>(false)
@@ -12,17 +14,21 @@ const UploadModal: FC = () => {
     const [previewImage, setPreviewImage] = useState<string>('')
     const [previewTitle, setPreviewTitle] = useState<string>('')
     const [fileList, setFileList] = useState<UploadFile[]>([]);
+    console.log(fileList)
+    const [addFiles] = useMutation(ADD_FILES);
 
-    // const [addTodo, { data, loading, error }] = useMutation(ADD_TODO, {
-    //     variables: {
-    //         type: "placeholder",
-    //         someOtherVariable: 1234,
-    //     },
-    // });
 
-    const handlePreviewModalCancel = () => setPreviewVisible(false);
+
     const handleModalCancel = () => setModalVisible(false);
-
+    const handlePreviewModalCancel = () => setPreviewVisible(false);
+    const addFilesHandler = () => {
+        addFiles({
+            variables: {
+                files: fileList,
+                tagIds: ["1","2"]
+            },
+        }).then(e=>console.log("addFiles->then",e))
+    }
     return (
         <div>
             <Tooltip title="Добавить файлы">
@@ -40,10 +46,7 @@ const UploadModal: FC = () => {
                 visible={modalVisible}
                 onCancel={handleModalCancel} //выполняется при закрытие окна(клике вне окна или клике по крестику)
                 footer={[
-                    <Button key="back">
-                        Отменить
-                    </Button>,
-                    <Button key="submit" type="primary">
+                    <Button key="submit" type="primary" onClick={addFilesHandler}>
                         Добавить
                     </Button>,
                 ]}
