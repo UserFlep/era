@@ -4,12 +4,21 @@ import {Modal, Button, Tooltip, Divider} from 'antd';
 import {UploadOutlined} from "@ant-design/icons"
 import UploadDragger from "./UploadDragger";
 import TreeSelectInput from "../TreeSelectInput/TreeSelectInput";
+import {UploadFile} from "antd/es/upload/interface";
 
 const UploadModal: FC = () => {
     const [modalVisible, setModalVisible] = useState<boolean>(false)
     const [previewVisible, setPreviewVisible] = useState<boolean>(false)
     const [previewImage, setPreviewImage] = useState<string>('')
     const [previewTitle, setPreviewTitle] = useState<string>('')
+    const [fileList, setFileList] = useState<UploadFile[]>([]);
+
+    // const [addTodo, { data, loading, error }] = useMutation(ADD_TODO, {
+    //     variables: {
+    //         type: "placeholder",
+    //         someOtherVariable: 1234,
+    //     },
+    // });
 
     const handlePreviewModalCancel = () => setPreviewVisible(false);
     const handleModalCancel = () => setModalVisible(false);
@@ -27,7 +36,7 @@ const UploadModal: FC = () => {
             <Modal
                 title="Выберите файлы"
                 centered
-                width={'60%'}
+                width='60%'
                 visible={modalVisible}
                 onCancel={handleModalCancel} //выполняется при закрытие окна(клике вне окна или клике по крестику)
                 footer={[
@@ -44,6 +53,8 @@ const UploadModal: FC = () => {
                     setPreviewImage={setPreviewImage}
                     setPreviewVisible={setPreviewVisible}
                     setPreviewTitle={setPreviewTitle}
+                    setFileList={setFileList}
+                    fileList={fileList}
                 />
 
                 {/*Preview - предпросмотр файла - открывает файл на весь экран с возможностью перехода к другим изображениям*/}
@@ -58,7 +69,7 @@ const UploadModal: FC = () => {
 
                 <Divider/>
                 <span>Выберите родительскую группу:</span>
-                <TreeSelectInput/>
+                <TreeSelectInput maxTagCount={1}/>
 
             </Modal>
         </div>
