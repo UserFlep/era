@@ -59,7 +59,7 @@ const TreeSelectInput:React.FC<IProps> = observer(({maxTagCount="responsive"}) =
         <TreeSelect
             className={classes.treeSelect}
             placeholder={loading ? "Получение данных..." : error ? "Ошибка получения данных!" : "Поиск по ключевым словам"}
-            status={loading ? "warning" : error ? "error" : ""}
+            status={error ? "error" : ""}
             allowClear
             showSearch
             multiple

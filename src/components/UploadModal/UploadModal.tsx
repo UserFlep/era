@@ -13,22 +13,13 @@ const UploadModal: FC = () => {
     const [previewVisible, setPreviewVisible] = useState<boolean>(false)
     const [previewImage, setPreviewImage] = useState<string>('')
     const [previewTitle, setPreviewTitle] = useState<string>('')
-    const [fileList, setFileList] = useState<UploadFile[]>([]);
-    console.log(fileList)
-    const [addFiles] = useMutation(ADD_FILES);
 
 
 
-    const handleModalCancel = () => setModalVisible(false);
+
+    const handleModalClose = () => setModalVisible(false);
     const handlePreviewModalCancel = () => setPreviewVisible(false);
-    const addFilesHandler = () => {
-        addFiles({
-            variables: {
-                files: fileList,
-                tagIds: ["1","2"]
-            },
-        }).then(e=>console.log("addFiles->then",e))
-    }
+
     return (
         <div>
             <Tooltip title="Добавить файлы">
@@ -44,10 +35,10 @@ const UploadModal: FC = () => {
                 centered
                 width='60%'
                 visible={modalVisible}
-                onCancel={handleModalCancel} //выполняется при закрытие окна(клике вне окна или клике по крестику)
+                onCancel={handleModalClose} //выполняется при закрытие окна(клике вне окна или клике по крестику)
                 footer={[
-                    <Button key="submit" type="primary" onClick={addFilesHandler}>
-                        Добавить
+                    <Button key="submit" type="primary" onClick={handleModalClose}>
+                        ОК
                     </Button>,
                 ]}
             >
@@ -56,8 +47,6 @@ const UploadModal: FC = () => {
                     setPreviewImage={setPreviewImage}
                     setPreviewVisible={setPreviewVisible}
                     setPreviewTitle={setPreviewTitle}
-                    setFileList={setFileList}
-                    fileList={fileList}
                 />
 
                 {/*Preview - предпросмотр файла - открывает файл на весь экран с возможностью перехода к другим изображениям*/}
@@ -68,11 +57,13 @@ const UploadModal: FC = () => {
                     onCancel={handlePreviewModalCancel}
                 >
                     <img alt="просмотр" className={classes.imgPreview} src={previewImage}/>
+                    <Divider/>
+                    <TreeSelectInput />
                 </Modal>
 
                 <Divider/>
-                <span>Выберите родительскую группу:</span>
-                <TreeSelectInput maxTagCount={1}/>
+                <span>Назначить теги:</span>
+                <TreeSelectInput />
 
             </Modal>
         </div>
