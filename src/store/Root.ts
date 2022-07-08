@@ -1,21 +1,20 @@
 import {types, onSnapshot, Instance} from "mobx-state-tree";
 import {TagStore} from "./Tag";
 
-const RootModel = types
+const RootStore = types
     .model({
         tagStore: TagStore
     })
 
-const initialState = RootModel.create({
+export const store = RootStore.create({
     tagStore: {
         selectedItems: [],
+        selectedItem: null,
     }
 });
 
-export const rootStore = initialState;
-
-onSnapshot(rootStore, (snapshot) => {
+onSnapshot(store, (snapshot) => {
     console.log("Snapshot: ", snapshot);
 });
 
-export type RootInstance = Instance<typeof RootModel>;
+export type storeInstance = Instance<typeof RootStore>;

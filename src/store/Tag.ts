@@ -3,9 +3,11 @@ import {Key} from "react"
 
 
 const selectedItemsType = types.array(types.string)
+const selectedItemType = types.maybeNull(types.string)
 export const TagStore:any = types
     .model({
-        selectedItems: selectedItemsType
+        selectedItems: selectedItemsType,   //Для multiple TreeSelect
+        selectedItem: selectedItemType      //Для single TreeSelect
     })
     .actions(self => ({
         setSelectedList(selectedItems: string[]){
@@ -13,6 +15,12 @@ export const TagStore:any = types
         },
         clearSelectedList(){
             self.selectedItems.clear()
+        },
+        setSelectedItem(selectedItem: string){
+            self.selectedItem = selectedItemType.create(selectedItem)
+        },
+        clearSelectedItem(){
+            self.selectedItem = null
         },
         addOption(title: string, parentId: Key){
             //Добавляется запрос асинхронно в бд
