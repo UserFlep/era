@@ -23,8 +23,10 @@ const TreeSelectInput:React.FC<TreeSelectProps> = observer(({multiple=false}) =>
         console.log("useEffect--->Data fetching")
     },[data])
 
-    const onChange = (newValue: string[] | string) => {
-        Array.isArray(newValue) ?
+    const onChange = (newValue: string[] | string,) => {
+        console.log("newValue", newValue)
+        Array.isArray(newValue)
+            ?
             tagStore.setSelectedList(newValue)
             :
             tagStore.setSelectedItem(newValue)
