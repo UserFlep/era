@@ -44,7 +44,10 @@ const UploadDragger: FC<IProps> = ({setPreviewImage, setPreviewVisible, setPrevi
         setPreviewTitle(file.name || file.url!.substring(file.url!.lastIndexOf('/') + 1))
     };
 
-    const handleDraggerChange: UploadProps['onChange'] = ({fileList: newFileList}) => setFileList(newFileList);
+    const handleDraggerChange: UploadProps['onChange'] = ({fileList: newFileList}) => {
+        setFileList(newFileList);
+    }
+
     return (
         <Upload.Dragger
             className={classes.dragger}

@@ -1,11 +1,11 @@
 import React, {createContext, FC, useContext} from 'react'
-import {RootInstance, rootStore} from "../store/Root";
+import {storeInstance, store} from "../store/Root";
 
 
-const RootStoreContext = createContext<null | RootInstance>(null);
+const StoreContext = createContext<null | storeInstance>(null);
 
 export function useMst() {
-    const store = useContext(RootStoreContext);
+    const store = useContext(StoreContext);
     if (store === null) {
         throw new Error("Store не может быть пустым, добавь context provider");
     }
@@ -14,8 +14,8 @@ export function useMst() {
 
 export const MSTProvider:FC<any> = ({children}) => {
     return (
-        <RootStoreContext.Provider value={rootStore}>
+        <StoreContext.Provider value={store}>
             {children}
-        </RootStoreContext.Provider>
+        </StoreContext.Provider>
     )
 }

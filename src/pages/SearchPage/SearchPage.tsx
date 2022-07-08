@@ -14,7 +14,7 @@ const SearchPage: FC = () => {
 
                 <PageHeader style={{paddingTop:0}}>
                     <Space direction="vertical" style={{width: "100%"}}>
-                        <TreeSelectInput/>
+                        <TreeSelectInput multiple/>
                     </Space>
                 </PageHeader>
 

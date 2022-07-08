@@ -7,12 +7,10 @@ import {useQuery} from "@apollo/client";
 import {GET_TAGS} from "../../requests/tag/Query";
 import {useMst} from "../../context";
 import { observer } from 'mobx-react-lite';
+import type {TreeSelectProps} from "antd/lib/tree-select"
 
-interface IProps {
-    maxTagCount?: number | 'responsive'
-}
 
-const TreeSelectInput:React.FC<IProps> = observer(({maxTagCount="responsive"}) => {
+const TreeSelectInput:React.FC<TreeSelectProps> = observer(({multiple=false}) => {
     const {tagStore} = useMst()
     const {loading, error, data } = useQuery(GET_TAGS);
     const [treeData, setTreeData] = React.useState<DefaultOptionType[]>();
@@ -25,8 +23,11 @@ const TreeSelectInput:React.FC<IProps> = observer(({maxTagCount="responsive"}) =
         console.log("useEffect--->Data fetching")
     },[data])
 
-    const onChange = (newValue: string[]) => {
-        tagStore.setSelectedList(newValue);
+    const onChange = (newValue: string[] | string) => {
+        Array.isArray(newValue) ?
+            tagStore.setSelectedList(newValue)
+            :
+            tagStore.setSelectedItem(newValue)
     };
 
 
@@ -62,14 +63,14 @@ const TreeSelectInput:React.FC<IProps> = observer(({maxTagCount="responsive"}) =
             status={error ? "error" : ""}
             allowClear
             showSearch
-            multiple
+            multiple={multiple}
             filterTreeNode
             treeDataSimpleMode
-            maxTagCount={maxTagCount}
+            maxTagCount="responsive"
             maxTagPlaceholder={maxTagPlaceholderHandler}
             showCheckedStrategy={"SHOW_ALL"}
             treeData={treeData}
-            value={tagStore.selectedItems}
+            value={multiple ? tagStore.selectedItems : tagStore.selectedItem}
             treeNodeFilterProp="title"
             onChange={onChange}
         />
